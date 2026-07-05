@@ -4,9 +4,8 @@
 
 **Please do not open public issues for security problems.** Report privately:
 
-- Open a [private security advisory](https://github.com/openbean/openbean/security/advisories/new) on GitHub
-- Or email **security@openbean.dev**
-- Include: affected version/commit, reproduction, and impact.
+- Email **security@openbean.dev** with affected version, reproduction, and impact
+- (Maintainers may also open a private advisory through the maintainer team's internal GitHub workflow.)
 
 We aim to acknowledge within **3 business days** and to ship a fix or mitigation for
 confirmed high-severity issues within **30 days**, coordinating disclosure with you.

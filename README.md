@@ -5,9 +5,9 @@ for AI tools.
 
 This repository is one of three in the OpenBean project:
 
-- **[openbean/openbean](https://github.com/openbean/openbean)** — the engine, the CLI, the SDK, the database, the tests. The source of truth.
-- **[openbean/openbean-website](https://github.com/openbean/openbean-website)** — this repository. The public site.
-- **[openbean/openbean-docs](https://github.com/openbean/openbean-docs)** — the public documentation.
+- **`openbean/openbean-website`** — this repository. The public site.
+- **`openbean/openbean-docs`** — the public documentation.
+- **`openbean/openbean`** — the engine, the CLI, the SDK, the database, the tests. The source of truth. **Not publicly accessible** (the engine workspace is private; the open-source engine sources, the CLI, the SDK, and the tests are distributed to enterprise customers under the standard enterprise license, not via a public GitHub mirror).
 
 ## What this is
 
