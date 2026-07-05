@@ -6,7 +6,7 @@
 // service shape. Each answer points at the canonical document so the buyer
 // can verify it against the public source.
 
-import { Footer, TopBar } from "@openbean/ui";
+import { Footer, TopBar } from "@/app/ui";
 
 export const metadata = {
   title: "Enterprise FAQ — OpenBean",

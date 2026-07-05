@@ -1,5 +1,4 @@
-import "@openbean/ui/landing.css";
-import { Footer, TopBar } from "@openbean/ui";
+import { Footer, TopBar } from "@/app/ui";
 
 const GH = "https://github.com/openbean/openbean";
 const CONTACT = "/contact";

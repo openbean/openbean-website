@@ -8,7 +8,7 @@
 // Pilot Program, and Support are the new ones. Customer responsibilities and
 // OpenBean responsibilities are now in the grid alongside the others.
 
-import { Footer, TopBar } from "@openbean/ui";
+import { Footer, TopBar } from "@/app/ui";
 
 export const metadata = {
   title: "Professional Services — OpenBean",

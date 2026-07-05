@@ -5,7 +5,7 @@
 // The form's client-side validation enforces the fields the operator needs; the submit
 // step is the only network behavior, and it is a mailto: by design.
 
-import { Footer, TopBar } from "@openbean/ui";
+import { Footer, TopBar } from "@/app/ui";
 import { ContactForm } from "./ContactForm";
 
 export const metadata = {

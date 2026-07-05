@@ -4,7 +4,7 @@
 // have named customers to feature, and the maintainer team is not going to
 // invent one. The page is the template future case studies will fill.
 
-import { Footer, TopBar } from "@openbean/ui";
+import { Footer, TopBar } from "@/app/ui";
 
 export const metadata = {
   title: "Case Studies — OpenBean",

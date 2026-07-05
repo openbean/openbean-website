@@ -4,7 +4,7 @@
 // named exit criteria, and a named next step regardless of whether the
 // evaluation concludes with a "yes" or a "no."
 
-import { Footer, TopBar } from "@openbean/ui";
+import { Footer, TopBar } from "@/app/ui";
 
 export const metadata = {
   title: "Evaluation Program — OpenBean",
