@@ -17,9 +17,9 @@ export default function Home() {
     <div className="ob">
       <EnterpriseNav />
       <HeroSection />
+      <WhyOpenBeanGrid />
       <IndustryStrip />
       <ProblemSolutionSection />
-      <WhyOpenBeanGrid />
       <FinalCTA />
       <EnterpriseFooter />
     </div>
