@@ -1,237 +1,136 @@
-// The V14 Enterprise Demo page — the read-only, anonymized, 3-step walkthrough
-// of the Company Brain experience for a CEO. The page is a marketing surface,
-// not a live instance. The actual live demo (with a seeded Halberd Robotics
-// instance) is the local OpenBean instance seeded by `scripts/seed-demo.mjs`
-// in the engine repo; this page is the explainer that a CEO can read in 3
-// minutes without signing in.
+// The V15 Enterprise Demo — the entry point. The visitor lands here and
+// can either start the guided tour (the 6-step narrative in DemoBar) or
+// explore the live, seeded Northwind Manufacturing company on their own.
+//
+// The page is the home of the demo surface. It links to every other demo
+// view: the company, the people, the AI tools, the Company Brain, the
+// scenarios, the activity, and the reset.
 
+import Link from "next/link";
+import "@/app/ui/demo/demo.css";
 import { EnterprisePageShell } from "@/app/ui/home";
+import { DemoBar } from "@/app/ui/demo/DemoBar";
+import { COMPANY, SEED_STATS } from "@/app/demo/data/northwind";
 
 export const metadata = {
-  title: "Enterprise Demo — OpenBean",
+  title: "Live Demo — Northwind Manufacturing on OpenBean",
   description:
-    "See the Company Brain in action, with a real company's data. A 3-step walkthrough of how a growing company uses OpenBean to govern what its AI tools know, approve what matters, and audit everything.",
+    "Explore a real company on OpenBean. Northwind Manufacturing is a 60-person specialty chemicals manufacturer with 5 active AI tool connections, ~200 pieces of company knowledge, and a 30-day history. Read-only. Resettable in one click.",
   keywords: [
-    "OpenBean demo",
+    "OpenBean live demo",
+    "Northwind Manufacturing",
     "Company Brain demo",
     "AI knowledge management demo",
-    "enterprise AI demo",
-    "self-hosted AI demo",
+    "enterprise demo",
   ],
   openGraph: {
-    title: "Enterprise Demo — OpenBean",
+    title: "Live Demo — Northwind Manufacturing on OpenBean",
     description:
-      "See the Company Brain in action, with a real company's data.",
+      "Explore a real company on OpenBean. 60 people, 5 AI tools, ~200 pieces of company knowledge. Read-only. Resettable.",
     type: "website",
     url: "https://openbean.xyz/demo",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Enterprise Demo — OpenBean",
-    description: "See the Company Brain in action, with a real company's data.",
+    title: "Live Demo — Northwind Manufacturing on OpenBean",
+    description: "Explore a real company on OpenBean. Read-only. Resettable.",
   },
   alternates: { canonical: "https://openbean.xyz/demo" },
   robots: { index: true, follow: true },
 };
 
-const REQUEST_DEMO = "/contact?intent=demo";
-const EVAL = "/evaluation-program";
-
-export default function DemoPage() {
+export default function DemoHomePage() {
   return (
-    <EnterprisePageShell>
-      <div className="ob-wrap ob-doc-wrap">
-        <div className="ob-doc-hero">
-          <p className="ob-eyebrow">Enterprise Demo</p>
-          <h1 className="ob-h1">
-            See the Company Brain in action, with a real company’s data.
-          </h1>
-          <p className="ob-lead">
-            The Enterprise Demo is a 3-step walkthrough of how a growing
-            company uses OpenBean. The data is real (a fictional contract
-            manufacturer called <strong>Halberd Robotics</strong>, 50
-            employees, 4 departments, 6 projects). The screens are the
-            real screens. The audit log is a real database log. No sales
-            call required.
-          </p>
+    <>
+      <DemoBar active="home" cta={{ label: "Request a live demo", href: "/contact?intent=demo" }} />
+      <main className="ob-doc">
+        <div className="ob-wrap ob-doc-wrap">
+          <section className="ob-demo-hero">
+            <div className="ob-demo-hero-grid">
+              <div className="ob-demo-hero-card">
+                <p className="ent-eyebrow">Live demo · Northwind Manufacturing</p>
+                <h1>{COMPANY.name}</h1>
+                <p className="lede">
+                  A real 60-person specialty chemicals company. {COMPANY.description}
+                </p>
+                <div className="ob-demo-quick">
+                  <div className="ob-demo-quick-stat">
+                    <p className="label">People</p>
+                    <p className="value">{SEED_STATS.people}</p>
+                  </div>
+                  <div className="ob-demo-quick-stat">
+                    <p className="label">Pieces of knowledge</p>
+                    <p className="value">{SEED_STATS.knowledge}</p>
+                  </div>
+                  <div className="ob-demo-quick-stat">
+                    <p className="label">AI tool connections</p>
+                    <p className="value">{SEED_STATS.connections}</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <p className="ent-eyebrow">Where to start</p>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "grid", gap: 12 }}>
+                  <li>
+                    <Link
+                      href="/demo/tour"
+                      className="ob-brain-card"
+                      style={{ padding: 18 }}
+                    >
+                      <p className="question" style={{ fontSize: "1rem" }}>Start the guided tour</p>
+                      <p className="body" style={{ fontSize: "0.9rem" }}>6 steps. 3 minutes. The whole story of an AI tool helping a real company make a real decision.</p>
+                      <p className="arrow">Begin →</p>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/demo/brain"
+                      className="ob-brain-card"
+                      style={{ padding: 18 }}
+                    >
+                      <p className="question" style={{ fontSize: "1rem" }}>Explore the Company Brain</p>
+                      <p className="body" style={{ fontSize: "0.9rem" }}>6 questions a CEO would ask. Each one has a real answer in the seeded data.</p>
+                      <p className="arrow">Explore →</p>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/demo/scenarios"
+                      className="ob-brain-card"
+                      style={{ padding: 18 }}
+                    >
+                      <p className="question" style={{ fontSize: "1rem" }}>Walk through 7 scenarios</p>
+                      <p className="body" style={{ fontSize: "0.9rem" }}>New hire onboarding, sales policy, IT password, customer refund, executive decision, HR handbook, legal policy.</p>
+                      <p className="arrow">Walk through →</p>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section className="ob-demo-section">
+            <h2>What you can do here</h2>
+            <p className="lede">
+              The demo is a real, read-only window into a real company&apos;s
+              OpenBean instance. You can browse, search, follow the audit
+              history, and explore every department and every piece of
+              knowledge. You cannot delete, modify, approve, or administer.
+            </p>
+            <ul style={{ marginTop: 18, paddingLeft: 18, color: "var(--ob-muted)", lineHeight: 1.7 }}>
+              <li><strong style={{ color: "var(--ob-ink)" }}>Browse</strong> the company, the people, the AI tools, the knowledge, the activity.</li>
+              <li><strong style={{ color: "var(--ob-ink)" }}>Search</strong> the Company Brain for any topic — pricing, policy, decision, procedure.</li>
+              <li><strong style={{ color: "var(--ob-ink)" }}>Follow the audit history</strong> on every piece of knowledge: who proposed, who approved, who retracted.</li>
+              <li><strong style={{ color: "var(--ob-ink)" }}>Ask the AI</strong> a question (in the Recall view) and see what it recalls, with provenance.</li>
+              <li><strong style={{ color: "var(--ob-ink)" }}>Reset</strong> the demo to a fresh state in one click.</li>
+            </ul>
+            <p style={{ marginTop: 18, color: "var(--ob-muted)", fontSize: "0.9rem" }}>
+              Want a live walkthrough with your data instead of Northwind&apos;s?
+              <a href="/contact?intent=demo"> Request a live demo with your company&apos;s data</a>.
+            </p>
+          </section>
         </div>
-
-        <section className="ob-doc-section" id="story">
-          <h2 className="ob-h2">The story the demo tells</h2>
-          <p>
-            Halberd Robotics is a 50-person contract manufacturer. Their AI
-            tools — Claude Code for engineering, Cursor for code review, an
-            internal RAG for cross-functional knowledge — all read from
-            and write to the same Company Brain. Every important decision
-            is reviewed by a person. The full history is kept forever. The
-            demo walks through one typical Tuesday at Halberd:
-          </p>
-          <ol>
-            <li>
-              <strong>A new sales rep joins.</strong> She signs in to the
-              Company Brain and the dashboard shows her what the company
-              has already agreed is true. She does not have to ask anyone.
-            </li>
-            <li>
-              <strong>The engineering team’s AI proposes a pricing change.</strong>{" "}
-              The pricing is important enough that the Company Brain holds
-              it in the approval queue until the pricing manager signs off.
-            </li>
-            <li>
-              <strong>The pricing manager reviews the proposal.</strong> She
-              sees the reasoning, the trust score, the full chain of
-              custody. She approves.
-            </li>
-            <li>
-              <strong>Every other AI tool sees the change.</strong> The
-              next time anyone — in any department — asks the AI about
-              pricing, the answer is the approved one.
-            </li>
-            <li>
-              <strong>An auditor asks who approved a contract clause.</strong>{" "}
-              Six months later. The answer is one query against the audit
-              log.
-            </li>
-          </ol>
-        </section>
-
-        <section className="ob-doc-section" id="screens">
-          <h2 className="ob-h2">The screens the demo shows</h2>
-          <p>The demo walks through five screens, in order:</p>
-          <ol>
-            <li>
-              <strong>The home dashboard.</strong> A count of the knowledge
-              pieces proposed this week, a count of the important ones
-              waiting for a person’s approval, a count of the AI tools
-              connected, a count of the warnings about knowledge below the
-              trust threshold.
-            </li>
-            <li>
-              <strong>A single piece of knowledge, in full provenance.</strong>{" "}
-              The proposer (which AI tool), the project, the importance
-              level, the trust score, the full text, the chain of
-              custody.
-            </li>
-            <li>
-              <strong>The approval queue.</strong> Every important change
-              waiting for a person’s decision. One click to approve, one
-              click to retract, one click to see the full reasoning.
-            </li>
-            <li>
-              <strong>The full knowledge store.</strong> Every piece of
-              company knowledge, with filters by department, project,
-              importance, and trust. The full history is one click away.
-            </li>
-            <li>
-              <strong>The operations surface.</strong> Health, backups,
-              storage, updates, logs, diagnostics, notifications.
-              Everything the IT team needs to operate the Company Brain is
-              in the browser.
-            </li>
-          </ol>
-        </section>
-
-        <section className="ob-doc-section" id="data">
-          <h2 className="ob-h2">The data the demo uses</h2>
-          <p>
-            The Halberd Robotics seed data is realistic: a working
-            contract manufacturer with active projects, an active sales
-            pipeline, an active operations schedule, and a working
-            compliance program. The seed produces:
-          </p>
-          <ul>
-            <li>1 organization (Halberd Robotics)</li>
-            <li>4 departments (Engineering, Operations, Sales, Compliance)</li>
-            <li>6 projects (Atlas, Beacon, Compass, Drift, Echo, Forge)</li>
-            <li>18 employees (1 owner, 2 admins, 15 members)</li>
-            <li>~120 pieces of company knowledge across 8 categories</li>
-            <li>24 important changes waiting for a person’s approval</li>
-            <li>3 active AI tool connections (Claude Code, Cursor, internal RAG)</li>
-          </ul>
-          <p>
-            The seed is idempotent and resettable. See the{" "}
-            <a href="#reset">reset procedure</a>.
-          </p>
-        </section>
-
-        <section className="ob-doc-section" id="reset">
-          <h2 className="ob-h2">Resettable in one command</h2>
-          <p>
-            The demo is resettable. The seed script produces the same
-            state every time it runs, so a fresh demo is one command
-            away:
-          </p>
-          <pre><code>node scripts/seed-demo.mjs --reset</code></pre>
-          <p>
-            The seed script refuses to run against a non-localhost URL.
-            The seed is a development tool, not a production tool.
-          </p>
-        </section>
-
-        <section className="ob-doc-section" id="next-steps">
-          <h2 className="ob-h2">Next steps after the demo</h2>
-          <div className="ob-doc-grid">
-            <article>
-              <h3>Request a live demo with your data</h3>
-              <p>
-                The maintainer team will run a live walkthrough of the
-                Company Brain with your company’s actual data (a
-                sanitized sample, not your production data). The
-                walkthrough takes 30 minutes and is the closest you can
-                get to a real evaluation without standing up your own
-                instance.
-              </p>
-              <p>
-                <a className="ob-btn ob-btn-primary" href={REQUEST_DEMO}>
-                  Request a live demo
-                </a>
-              </p>
-            </article>
-            <article>
-              <h3>Start the Evaluation Program</h3>
-              <p>
-                The Evaluation Program is a 4–6 week path with five
-                named gates. The maintainer team commits to the timeline
-                in the Discovery brief; the next step is named at every
-                gate, regardless of whether the evaluation concludes
-                with a yes or a no.
-              </p>
-              <p>
-                <a className="ob-btn" href={EVAL}>Read the Evaluation Program</a>
-              </p>
-            </article>
-            <article>
-              <h3>Stand up your own instance</h3>
-              <p>
-                OpenBean is open source, self-hosted, and ships with a
-                single-command installer. The same software that runs
-                the demo runs in your environment, with your database,
-                your credentials, and your audit log.
-              </p>
-              <p>
-                <a
-                  className="ob-btn"
-                  href="https://github.com/openbean/openbean"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  See the install guide on GitHub
-                </a>
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section className="ob-doc-section">
-          <h2 className="ob-h2">Related pages</h2>
-          <ul>
-            <li><a href="/services">Professional Services</a> — the named engagements the maintainer team offers.</li>
-            <li><a href={EVAL}>Evaluation Program</a> — the 4–6 week path with five named gates.</li>
-            <li><a href="/pricing">Pricing philosophy</a> — why there is no price on the page, and the four-step path to a quote.</li>
-            <li><a href="/security">Security</a> — the one-page summary for a security reviewer.</li>
-          </ul>
-        </section>
-      </div>
-    </EnterprisePageShell>
+      </main>
+    </>
   );
 }
