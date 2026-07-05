@@ -1,0 +1,259 @@
+#!/usr/bin/env bash
+# OpenBean installer (macOS / Linux) — https://github.com/openbean/openbean
+#
+# Detects your platform and container runtime, gets you a checkout, installs
+# dependencies, and brings up your instance — ending with your browser open on
+# the guided setup wizard. Matches docs/specs/006-installation-and-developer-
+# experience.md's Advanced Mode: this runs `npm run dev:up` against a real
+# source checkout, the same fully-working path the README's own Quickstart
+# already documents — this script only automates getting there.
+#
+# Usage:
+#   curl -fsSL https://openbean.xyz/install | bash
+#
+# Every prompt below reads from /dev/tty rather than stdin: when this script
+# runs via `curl | bash`, stdin is the pipe carrying the SCRIPT itself, not
+# your keyboard — reading from stdin directly would silently consume the rest
+# of the script or hang. This is the same fix every curl-|-bash installer
+# (rustup, nvm, Homebrew) applies for exactly this reason.
+#
+# V9 upgrade (2026-07-04): added detection for the container-runtime daemon
+# (was: the binary; is: the binary AND that it can answer `docker ps`), the
+# port 3000 collision, and the local DNS resolution. The script never
+# leaves the user with an unexplained failure: every detected problem names
+# the cause and the recovery command.
+
+set -euo pipefail
+
+REPO_URL="https://github.com/openbean/openbean.git"
+INSTALL_DIR="${OPENBEAN_INSTALL_DIR:-$HOME/openbean}"
+APP_PORT="${OPENBEAN_APP_PORT:-3000}"
+
+bold() { printf '\033[1m%s\033[0m\n' "$1"; }
+info() { printf '  \033[2m%s\033[0m\n' "$1"; }
+ok() { printf '  \033[32m✓\033[0m %s\n' "$1"; }
+warn() { printf '  \033[33m!\033[0m %s\n' "$1"; }
+err() { printf '  \033[31m✗\033[0m %s\n' "$1"; }
+
+prompt_continue() {
+  # Falls back to a plain read if /dev/tty isn't available (e.g. already running
+  # non-interactively in CI, or via a non-interactive SSH invocation with no
+  # allocated pty) rather than hanging forever. `[ -r /dev/tty ]` is not enough
+  # to detect this: the device node exists with readable permission bits on
+  # essentially every Linux system regardless of whether the calling process
+  # actually has a controlling terminal, so the open itself is what can fail
+  # (ENXIO, "No such device or address") — only actually opening it proves
+  # whether a read will work.
+  if { exec 3<>/dev/tty; } 2>/dev/null; then
+    read -rp "$1 " _ <&3
+    exec 3<&-
+  else
+    printf '%s (no interactive terminal available — continuing)\n' "$1"
+  fi
+}
+
+# Probe whether a TCP port is in use. Returns 0 if the port is free, 1 if it's bound.
+# Uses bash's /dev/tcp; works on macOS and Linux without any new dependency.
+port_is_free() {
+  local port="$1"
+  if { exec 3<>"/dev/tcp/127.0.0.1/${port}"; } 2>/dev/null; then
+    exec 3<&- 3>&-
+    return 1
+  fi
+  return 0
+}
+
+# Probe whether the local hostname resolves. Returns 0 if DNS works, 1 if it
+# doesn't. This is a real failure mode in some WSL / corporate VPN setups.
+dns_works() {
+  getent hosts localhost >/dev/null 2>&1 || \
+  python3 -c "import socket; socket.gethostbyname('localhost')" >/dev/null 2>&1 || \
+  nslookup localhost >/dev/null 2>&1
+}
+
+echo
+bold "OpenBean installer"
+echo "A governed, append-only memory layer for AI-powered teams — self-hosted, permanently."
+echo
+
+# --- 1. Platform detection ------------------------------------------------------------
+OS="$(uname -s)"
+case "$OS" in
+  Linux*)
+    PLATFORM="linux"
+    ;;
+  Darwin*)
+    PLATFORM="macos"
+    ;;
+  MINGW*|MSYS*|CYGWIN*)
+    # Git Bash on native Windows — a real, already-documented path for this project
+    # (Docker Desktop or Podman Desktop both work here), distinct from install.ps1's
+    # native PowerShell path.
+    PLATFORM="windows-bash"
+    ;;
+  *)
+    err "Unrecognized platform '$OS'. See https://github.com/openbean/openbean for manual setup."
+    exit 1
+    ;;
+esac
+echo "Platform: $PLATFORM"
+
+# --- 2. Node.js (22+) ------------------------------------------------------------------
+if ! command -v node >/dev/null 2>&1; then
+  err "Node.js 22 or newer is required and wasn't found."
+  echo "  Install it from https://nodejs.org (or your platform's package manager), then re-run:"
+  echo "    curl -fsSL https://openbean.xyz/install | bash"
+  exit 1
+fi
+NODE_MAJOR="$(node -p 'process.versions.node.split(".")[0]')"
+if [ "$NODE_MAJOR" -lt 22 ]; then
+  err "Node.js 22+ is required — found $(node -v). Please upgrade and re-run this script."
+  exit 1
+fi
+ok "Node.js $(node -v) found."
+
+# --- 3. git --------------------------------------------------------------------------
+if ! command -v git >/dev/null 2>&1; then
+  err "git is required and wasn't found. Install it, then re-run this script."
+  exit 1
+fi
+ok "git $(git --version | awk '{print $3}') found."
+
+# --- 4. Container runtime — Podman preferred, Docker fine, guide if neither ------------
+RUNTIME=""
+if command -v podman >/dev/null 2>&1; then
+  RUNTIME="podman"
+elif command -v docker >/dev/null 2>&1; then
+  RUNTIME="docker"
+fi
+
+if [ -z "$RUNTIME" ]; then
+  err "No container runtime found. OpenBean's local stack (Postgres, Auth, PostgREST) needs"
+  echo "  Podman or Docker."
+  case "$PLATFORM" in
+    macos)
+      echo "  brew install podman"
+      echo "  or install Docker Desktop: https://www.docker.com/products/docker-desktop"
+      ;;
+    linux)
+      echo "  Debian/Ubuntu: sudo apt install podman podman-docker"
+      echo "    (podman-docker provides the 'docker' CLI OpenBean's tooling actually calls;"
+      echo "    podman alone is not enough — no Podman machine/VM step needed on Linux)"
+      echo "  Fedora:        sudo dnf install podman"
+      echo "  or install Docker: https://docs.docker.com/engine/install/"
+      ;;
+    windows-bash)
+      echo "  Install Docker Desktop or Podman Desktop, with WSL2 enabled."
+      ;;
+  esac
+  echo
+  prompt_continue "Press Enter once installed to continue (Ctrl+C to stop here)..."
+  if command -v podman >/dev/null 2>&1; then
+    RUNTIME="podman"
+  elif command -v docker >/dev/null 2>&1; then
+    RUNTIME="docker"
+  else
+    err "Still no runtime found. Install one, then re-run this script."
+    exit 1
+  fi
+fi
+
+# V9: verify the runtime binary is more than installed — verify the *daemon*
+# answers. `docker --version` succeeding while the daemon is down is a real,
+# silent-failure mode (the Supabase CLI's `supabase start` then errors with
+# "Cannot connect to the Docker daemon"). Detect it now, not five minutes in.
+if ! "$RUNTIME" ps >/dev/null 2>&1; then
+  err "Container runtime '$RUNTIME' is installed but its daemon is not responding."
+  case "$PLATFORM/$RUNTIME" in
+    macos/podman)
+      echo "  On macOS, Podman needs a machine running. Try:"
+      echo "    podman machine init   (only the first time)"
+      echo "    podman machine start"
+      ;;
+    macos/docker)
+      echo "  On macOS, Docker Desktop needs to be running. Open Docker Desktop, wait for"
+      echo "  the whale icon to settle, then re-run this script."
+      ;;
+    linux/podman)
+      echo "  On Linux, the podman socket should be active. Try:"
+      echo "    systemctl status podman.socket"
+      echo "    sudo systemctl enable --now podman.socket"
+      ;;
+    linux/docker)
+      echo "  On Linux, the docker daemon may not be running. Try:"
+      echo "    sudo systemctl status docker"
+      echo "    sudo systemctl enable --now docker"
+      ;;
+    windows-bash/*)
+      echo "  On Windows, the container runtime (Docker Desktop or Podman Desktop) needs to"
+      echo "  be running. Open the desktop app, wait for the indicator to settle, then re-run."
+      ;;
+  esac
+  exit 1
+fi
+ok "Container runtime: $RUNTIME (daemon reachable)"
+
+# --- 4b. V9: port 3000 already in use --------------------------------------------------
+# The Next.js application serves on port 3000 by default. If something else is
+# already bound there (another dev server, a previous openbean instance that
+# didn't shut down cleanly, a corporate proxy), the bring-up will either fail
+# or silently use a different port. Detect it now and name the cause.
+if ! port_is_free "$APP_PORT"; then
+  err "Port $APP_PORT is already in use. OpenBean's web application needs that port."
+  echo "  Common causes: another dev server, a leftover openbean instance, a corporate"
+  echo "  proxy. Find the process with:"
+  case "$PLATFORM" in
+    macos)
+      echo "    lsof -iTCP:$APP_PORT -sTCP:LISTEN"
+      echo "  Then stop it (or set OPENBEAN_APP_PORT to a free port and re-run this script)."
+      ;;
+    linux)
+      echo "    ss -ltnp 'sport = :$APP_PORT'"
+      echo "  Then stop it (or set OPENBEAN_APP_PORT to a free port and re-run this script)."
+      ;;
+    windows-bash)
+      echo "    netstat -ano | findstr :$APP_PORT"
+      echo "  Then stop it (or set OPENBEAN_APP_PORT to a free port and re-run this script)."
+      ;;
+  esac
+  exit 1
+fi
+ok "Port $APP_PORT is free."
+
+# --- 4c. V9: local DNS resolution ------------------------------------------------------
+# Some WSL / corporate-VPN configurations break local DNS in ways that make
+# `localhost` unresolvable inside the container runtime. Detect it now; the
+# `npm run dev:up` step will fail later if not.
+if ! dns_works; then
+  warn "Local DNS resolution may be broken. The bring-up step may fail."
+  echo "  Common cause: a corporate VPN or WSL configuration that does not resolve"
+  echo "  'localhost' for non-root users. If the install fails later with a DNS or"
+  echo "  connection error, check your VPN client or your /etc/nsswitch.conf."
+fi
+
+# --- 5. Get a checkout -------------------------------------------------------------------
+if [ -f "package.json" ] && grep -q '"name": *"openbean"' package.json 2>/dev/null; then
+  echo
+  echo "Already inside an OpenBean checkout — using this directory."
+else
+  echo
+  if [ -d "$INSTALL_DIR/.git" ]; then
+    echo "Found an existing checkout at $INSTALL_DIR — updating it."
+    git -C "$INSTALL_DIR" pull --ff-only
+  else
+    echo "Cloning OpenBean into $INSTALL_DIR..."
+    git clone "$REPO_URL" "$INSTALL_DIR"
+  fi
+  cd "$INSTALL_DIR"
+fi
+
+# --- 6. Install + bring up --------------------------------------------------------------
+echo
+bold "Installing dependencies (this can take a minute)..."
+npm install
+
+echo
+bold "Starting your instance..."
+echo "This brings up the local stack, generates your configuration, and opens your"
+echo "browser on the guided setup wizard — nothing left to configure by hand."
+npm run dev:up
