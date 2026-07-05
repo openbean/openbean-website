@@ -5,18 +5,18 @@ import "@/app/ui/landing.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://openbean.xyz"),
-  title: "OpenBean - Governed AI Memory Infrastructure for the Enterprise",
+  title: "OpenBean - The Memory Layer Your Business Can Trust",
   description:
-    "Every AI assistant across your organization shares one governed, auditable memory - deployed inside your own infrastructure, under your own policies. Self-hosted, permanently. No vendor lock-in, no shared database, no exceptions.",
+    "OpenBean captures, organizes, and verifies important business knowledge so your AI agents, tools, and teams always work with the right context. Deployed on your own infrastructure, under your own control.",
   openGraph: {
-    title: "OpenBean - Governed AI Memory Infrastructure",
-    description: "Your knowledge. Your policies. Your infrastructure.",
+    title: "OpenBean - The Memory Layer Your Business Can Trust",
+    description: "Verified. Governed. Always up to date.",
     images: ["/banner.png"],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050605",
+  themeColor: "#05070a",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
