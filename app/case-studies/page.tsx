@@ -7,8 +7,26 @@
 import { EnterprisePageShell } from "@/app/ui/home";
 
 export const metadata = {
-  title: "Case Studies — OpenBean",
-  description: "The case study template and the publishability charter. OpenBean does not have named customers to feature today; the page is the structure future case studies will fill, and the conditions under which one is publishable.",
+  title: "Case Studies — OpenBean, the AI Transformation Platform",
+  description:
+    "The case study template and the publishability charter. The Company Brain is OpenBean's flagship product; the case studies that follow are the structure future engagements will fill.",
+  keywords: [
+    "OpenBean case studies",
+    "Company Brain case studies",
+    "AI Transformation Platform case studies",
+  ],
+  openGraph: {
+    title: "Case Studies — OpenBean",
+    description: "The case study template and the publishability charter.",
+    type: "website",
+    url: "https://openbean.xyz/case-studies",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Case Studies — OpenBean",
+    description: "The case study template and the publishability charter.",
+  },
+  alternates: { canonical: "https://openbean.xyz/case-studies" },
 };
 
 export default function CaseStudiesPage() {

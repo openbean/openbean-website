@@ -7,8 +7,28 @@
 import { EnterprisePageShell } from "@/app/ui/home";
 
 export const metadata = {
-  title: "Evaluation Program — OpenBean",
-  description: "A structured 4–6 week path from \"I have heard of OpenBean\" to \"I am running it in production.\" Named gates, named deliverables at each gate, named exit criteria.",
+  title: "Evaluation Program — OpenBean, the AI Transformation Platform",
+  description:
+    "The structured 4–6 week path from 'I have heard of OpenBean' to 'I am running the Company Brain in production.' Five named gates, each with a named deliverable, a named exit condition, and a named next step.",
+  keywords: [
+    "OpenBean evaluation",
+    "Company Brain evaluation",
+    "AI Transformation Platform evaluation",
+    "OpenBean pilot",
+  ],
+  openGraph: {
+    title: "Evaluation Program — OpenBean",
+    description:
+      "The 4–6 week path to a running Company Brain. Five named gates, each with a deliverable and an exit condition.",
+    type: "website",
+    url: "https://openbean.xyz/evaluation-program",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Evaluation Program — OpenBean",
+    description: "The 4–6 week path to a running Company Brain.",
+  },
+  alternates: { canonical: "https://openbean.xyz/evaluation-program" },
 };
 
 interface Gate {

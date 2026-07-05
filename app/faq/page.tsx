@@ -9,8 +9,28 @@
 import { EnterprisePageShell } from "@/app/ui/home";
 
 export const metadata = {
-  title: "Enterprise FAQ — OpenBean",
-  description: "Specific, named answers to the questions a security reviewer, procurement lead, or enterprise architect asks about OpenBean. Each answer points at the canonical public document.",
+  title: "Enterprise FAQ — OpenBean, the AI Transformation Platform",
+  description:
+    "Specific, named answers to the questions a security reviewer, procurement lead, or enterprise architect asks about the Company Brain — the flagship product of OpenBean. Each answer points at the canonical public document.",
+  keywords: [
+    "OpenBean FAQ",
+    "Company Brain FAQ",
+    "AI Transformation Platform FAQ",
+    "Enterprise Memory Platform FAQ",
+  ],
+  openGraph: {
+    title: "Enterprise FAQ — OpenBean",
+    description:
+      "Specific answers to the questions a security reviewer, procurement lead, or enterprise architect asks about the Company Brain.",
+    type: "website",
+    url: "https://openbean.xyz/faq",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Enterprise FAQ — OpenBean",
+    description: "Specific answers to the questions a buyer or a security reviewer asks.",
+  },
+  alternates: { canonical: "https://openbean.xyz/faq" },
 };
 
 interface Q {

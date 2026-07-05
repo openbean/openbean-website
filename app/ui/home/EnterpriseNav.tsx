@@ -36,13 +36,14 @@ const LINKS: NavItem[] = [
     href: "/case-studies",
     children: [
       { label: "Contact", href: "/contact" },
-      { label: "Talk to an expert", href: "/contact?intent=expert" },
-      { label: "Request a demo", href: "/contact?intent=demo" },
+      { label: "Talk to an AI Advisor", href: "/contact?intent=advisor" },
+      { label: "Request an Enterprise Demo", href: "/contact?intent=demo" },
     ],
   },
 ];
 
-const TALK_TO_EXPERT = "/contact?intent=expert";
+const REQUEST_DEMO = "/contact?intent=demo";
+const ADVISOR = "/contact?intent=advisor";
 
 export function EnterpriseNav() {
   const [open, setOpen] = useState(false);
@@ -103,7 +104,8 @@ export function EnterpriseNav() {
         </nav>
 
         <div className="ob-nav-cta">
-          <a className="ob-btn ob-btn-primary ob-btn-sm ob-nav-cta-primary" href={TALK_TO_EXPERT}>Talk to an Expert</a>
+          <a className="ob-btn ob-btn-primary ob-btn-sm ob-nav-cta-primary" href={REQUEST_DEMO}>Request an Enterprise Demo</a>
+          <a className="ob-btn ob-btn-sm ob-nav-cta-secondary" href={ADVISOR}>Talk to an AI Advisor</a>
           <button
             type="button"
             className="ob-nav-toggle"
@@ -126,7 +128,8 @@ export function EnterpriseNav() {
           <a key={item.label} href={item.href ?? item.children?.[0]?.href ?? "#"} onClick={() => setOpen(false)}>{item.label}</a>
         ))}
         <div className="ob-nav-mobile-cta">
-          <a className="ob-btn ob-btn-primary" href={TALK_TO_EXPERT} onClick={() => setOpen(false)}>Talk to an Expert</a>
+          <a className="ob-btn ob-btn-primary" href={REQUEST_DEMO} onClick={() => setOpen(false)}>Request an Enterprise Demo</a>
+          <a className="ob-btn" href={ADVISOR} onClick={() => setOpen(false)}>Talk to an AI Advisor</a>
         </div>
       </div>
     </header>

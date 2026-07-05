@@ -11,8 +11,29 @@
 import { EnterprisePageShell } from "@/app/ui/home";
 
 export const metadata = {
-  title: "Professional Services — OpenBean",
-  description: "The OpenBean maintainer team's service catalog: Architecture Review, Deployment Support, Migration Guidance, Migration Assessment, Training, Security Review, Pilot Program, Support, and Health Check. Each engagement has a named deliverable, a named exit condition, and a clear split of customer and OpenBean responsibilities.",
+  title: "Professional Services — OpenBean, the AI Transformation Platform",
+  description:
+    "The OpenBean maintainer team's service catalog: Architecture Review, Deployment Support, Migration Guidance, Migration Assessment, Training, Security Review, Pilot Program, Support, and Health Check. Each engagement has a named deliverable, a named exit condition, and a clear split of customer and OpenBean responsibilities.",
+  keywords: [
+    "OpenBean services",
+    "Company Brain services",
+    "AI Transformation Platform services",
+    "OpenBean pilot program",
+    "OpenBean architecture review",
+  ],
+  openGraph: {
+    title: "Professional Services — OpenBean",
+    description:
+      "Nine named engagements, each with a named deliverable and a named exit condition.",
+    type: "website",
+    url: "https://openbean.xyz/services",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Professional Services — OpenBean",
+    description: "Nine named engagements for the Company Brain.",
+  },
+  alternates: { canonical: "https://openbean.xyz/services" },
 };
 
 interface Service {

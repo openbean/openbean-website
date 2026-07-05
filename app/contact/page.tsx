@@ -2,8 +2,29 @@ import { EnterprisePageShell } from "@/app/ui/home";
 import { ContactForm } from "./ContactForm";
 
 export const metadata = {
-  title: "Talk to an Expert — OpenBean",
-  description: "Tell us about your organization, industry, deployment target, compliance regime, and timeline; a real human replies within one business day.",
+  title: "Request an Enterprise Demo — OpenBean, the AI Transformation Platform",
+  description:
+    "Tell us about your organization, industry, deployment target, compliance regime, and timeline; a real human replies within one business day. The structured intake for the OpenBean maintainer team.",
+  keywords: [
+    "OpenBean contact",
+    "Request an Enterprise Demo",
+    "Talk to an AI Advisor",
+    "OpenBean evaluation",
+    "Company Brain demo",
+  ],
+  openGraph: {
+    title: "Request an Enterprise Demo — OpenBean",
+    description:
+      "The structured intake for the OpenBean maintainer team. A real human replies within one business day.",
+    type: "website",
+    url: "https://openbean.xyz/contact",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Request an Enterprise Demo — OpenBean",
+    description: "A real human replies within one business day.",
+  },
+  alternates: { canonical: "https://openbean.xyz/contact" },
 };
 
 export default function ContactPage() {

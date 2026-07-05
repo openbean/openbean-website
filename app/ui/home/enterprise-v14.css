@@ -1,0 +1,207 @@
+/* V14 home page sections — the Business Outcomes, How It Works, Why Choose,
+   Enterprise Security, Deployment Options, Company Brain, Enterprise Demo,
+   Pricing Philosophy, and Customer Journey sections. Mirrors the existing
+   ob-* class naming, with each section getting a 3-up or ordered-list grid
+   pattern. Imported from app/page.tsx; the base classes (.ob-wrap, .ob-section,
+   .ob-eyebrow, .ob-h2, .ob-h3, .ob-lead, .ob-btn, .ob-btn-primary, .ob-btn-lg,
+   .ob-center) are provided by enterprise-base.css. */
+
+/* ── shared utility ─────────────────────────────────────────────── */
+.ob-cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.ob-h3 {
+  font-family: var(--nf-display, ui-sans-serif), ui-sans-serif, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-size: 1.18rem;
+  line-height: 1.35;
+  margin: 0 0 10px;
+  color: var(--ob-ink);
+}
+.ob-body {
+  color: var(--ob-muted);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── 3-up card grid (shared by outcomes, how-it-works, why-choose, security,
+       deployment, company-brain) ────────────────────────────────── */
+.ob-outcomes-grid,
+.ob-compare-grid,
+.ob-sec-grid,
+.ob-deploy-grid,
+.ob-cb-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.ob-outcome-card,
+.ob-compare-card,
+.ob-sec-card,
+.ob-deploy-card,
+.ob-cb-card {
+  border: 1px solid var(--ob-line);
+  background: var(--ob-surface);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ob-outcome-card .ob-eyebrow,
+.ob-compare-card .ob-eyebrow,
+.ob-sec-card .ob-eyebrow,
+.ob-deploy-card .ob-eyebrow,
+.ob-cb-card .ob-eyebrow {
+  margin-bottom: 4px;
+}
+
+/* ── how-it-works numbered list ─────────────────────────────────── */
+.ob-how-grid {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.ob-how-card {
+  border: 1px solid var(--ob-line);
+  background: var(--ob-surface);
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+}
+.ob-how-n {
+  font-family: var(--nf-display, ui-sans-serif), ui-sans-serif, sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ob-accent);
+  letter-spacing: -0.04em;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+/* ── enterprise-demo numbered list ──────────────────────────────── */
+.ob-demo-grid {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.ob-demo-card {
+  border: 1px solid var(--ob-line);
+  background: var(--ob-surface);
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+}
+.ob-demo-n {
+  font-family: var(--nf-display, ui-sans-serif), ui-sans-serif, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ob-accent);
+  letter-spacing: -0.04em;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+/* ── customer-journey ordered list ──────────────────────────────── */
+.ob-journey {
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+.ob-journey-step {
+  border: 1px solid var(--ob-line);
+  background: var(--ob-surface);
+  border-radius: 14px;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: minmax(140px, auto) 1fr;
+  grid-template-areas: "meta body";
+  gap: 8px 24px;
+  align-items: start;
+}
+.ob-journey-meta {
+  grid-area: meta;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ob-journey-n {
+  font-family: var(--nf-display, ui-sans-serif), ui-sans-serif, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ob-accent);
+  letter-spacing: -0.04em;
+}
+.ob-journey-dur {
+  color: var(--ob-muted);
+  font-size: 0.78rem;
+  font-family: var(--nf-mono, ui-monospace), monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.ob-journey-step .ob-h3 {
+  grid-area: body;
+  margin: 0 0 6px;
+}
+.ob-journey-step .ob-body {
+  grid-area: body;
+  grid-row: 2;
+}
+
+/* ── responsive ─────────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .ob-outcomes-grid,
+  .ob-compare-grid,
+  .ob-sec-grid,
+  .ob-deploy-grid,
+  .ob-cb-grid,
+  .ob-how-grid,
+  .ob-demo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ob-journey-step {
+    grid-template-columns: 1fr;
+    grid-template-areas: "meta" "body";
+  }
+}
+@media (max-width: 640px) {
+  .ob-outcomes-grid,
+  .ob-compare-grid,
+  .ob-sec-grid,
+  .ob-deploy-grid,
+  .ob-cb-grid,
+  .ob-how-grid,
+  .ob-demo-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ob-outcome-card,
+  .ob-compare-card,
+  .ob-sec-card,
+  .ob-deploy-card,
+  .ob-cb-card,
+  .ob-how-card,
+  .ob-demo-card,
+  .ob-journey-step {
+    transition: none;
+  }
+}

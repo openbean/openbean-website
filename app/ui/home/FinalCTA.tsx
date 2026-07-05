@@ -1,7 +1,7 @@
 import { IconArrowRight } from "./icons";
 
 const REQUEST_DEMO = "/contact?intent=demo";
-const TALK_TO_EXPERT = "/contact?intent=expert";
+const ADVISOR = "/contact?intent=advisor";
 
 export function FinalCTA() {
   return (
@@ -10,13 +10,13 @@ export function FinalCTA() {
         <div>
           <p className="ob-eyebrow">Ready to see it in action?</p>
           <h2 className="ob-h2">See how OpenBean can work for your organization.</h2>
-          <p className="ob-lead">Book a personalized demo with our team.</p>
+          <p className="ob-lead">Request an enterprise demo, or talk to an AI advisor first.</p>
           <div className="ob-final-cta">
             <a className="ob-btn ob-btn-primary ob-btn-lg" href={REQUEST_DEMO}>
-              Request a Demo
+              Request an Enterprise Demo
               <IconArrowRight width={17} height={17} />
             </a>
-            <a className="ob-btn ob-btn-lg" href={TALK_TO_EXPERT}>Talk to an Expert</a>
+            <a className="ob-btn ob-btn-lg" href={ADVISOR}>Talk to an AI Advisor</a>
           </div>
         </div>
 
