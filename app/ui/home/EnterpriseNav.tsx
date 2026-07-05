@@ -10,6 +10,7 @@ interface NavItem {
 }
 
 const LINKS: NavItem[] = [
+  { label: "Why OpenBean", href: "#why-openbean" },
   {
     label: "Solutions",
     href: "#solutions",
@@ -20,7 +21,6 @@ const LINKS: NavItem[] = [
       { label: "Team knowledge", href: "/#solutions" },
     ],
   },
-  { label: "Why OpenBean", href: "#why-openbean" },
   {
     label: "Resources",
     href: "/faq",
