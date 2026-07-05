@@ -4,7 +4,7 @@
 // named exit criteria, and a named next step regardless of whether the
 // evaluation concludes with a "yes" or a "no."
 
-import { Footer, TopBar } from "@/app/ui";
+import { EnterprisePageShell } from "@/app/ui/home";
 
 export const metadata = {
   title: "Evaluation Program — OpenBean",
@@ -77,48 +77,36 @@ const GATES: Gate[] = [
 
 export default function EvaluationProgramPage() {
   return (
-    <div className="lp ent">
-      <TopBar
-        tag="platform"
-        right={
-          <nav className="lp-nav" aria-label="Page sections">
-            <a href="/#governance">Governance</a>
-            <a href="/#architecture">Architecture</a>
-            <a href="/#security">Security</a>
-            <a href="/#deployment">Deployment</a>
-            <a href="/evaluation-program">Evaluation program</a>
-            <a href="/services">Services</a>
-            <a className="btn" href="/contact">Talk to us</a>
-          </nav>
-        }
-      />
-      <main className="lp-services">
-        <p className="ent-eyebrow">Evaluation Program</p>
-        <h1>From &ldquo;I have heard of OpenBean&rdquo; to &ldquo;I am running it in production.&rdquo;</h1>
-        <p className="lede">
-          A structured 4–6 week path with named gates, named deliverables at each gate, and
-          named exit criteria. The program is a contract: the success criteria are written
-          down in Gate 1, the architecture is signed off in Gate 2, the pilot is bounded
-          by the criteria in Gate 3, the production hand-off ends Gate 4, and Gate 5 is
-          the organization running OpenBean on its own terms.
-        </p>
-        <p className="lede">
-          The program ends with a &ldquo;yes&rdquo; or a &ldquo;no.&rdquo; Both are valid
-          outcomes; the contract&rsquo;s value is that the &ldquo;no&rdquo; is a written
-          close-out report the organization can use to inform its decision, not a quiet
-          end-of-engagement.
-        </p>
+    <EnterprisePageShell>
+      <div className="ob-wrap ob-doc-wrap">
+        <div className="ob-doc-hero">
+          <p className="ob-eyebrow">Evaluation Program</p>
+          <h1 className="ob-h1">From &ldquo;I have heard of OpenBean&rdquo; to &ldquo;I am running it in production.&rdquo;</h1>
+          <p className="ob-lead">
+            A structured 4–6 week path with named gates, named deliverables at each gate, and
+            named exit criteria. The program is a contract: the success criteria are written
+            down in Gate 1, the architecture is signed off in Gate 2, the pilot is bounded
+            by the criteria in Gate 3, the production hand-off ends Gate 4, and Gate 5 is
+            the organization running OpenBean on its own terms.
+          </p>
+          <p className="ob-lead">
+            The program ends with a &ldquo;yes&rdquo; or a &ldquo;no.&rdquo; Both are valid
+            outcomes; the contract&rsquo;s value is that the &ldquo;no&rdquo; is a written
+            close-out report the organization can use to inform its decision, not a quiet
+            end-of-engagement.
+          </p>
+        </div>
 
-        <div className="lp-svc-list">
+        <div className="ob-doc-list">
           {GATES.map((g) => (
-            <article key={g.id} className="lp-svc" id={g.id}>
+            <article key={g.id} className="ob-doc-card" id={g.id}>
               <h2>
-                <span style={{ marginRight: 12, opacity: 0.7 }}>Gate {g.number}.</span>
+                <span className="ob-doc-badge">Gate {g.number}.</span>
                 {g.name}
-                <span className="anchor">#{g.id}</span>
+                <span className="ob-doc-anchor">#{g.id}</span>
               </h2>
-              <p className="summary"><b>{g.duration}</b> — {g.description}</p>
-              <div className="grid">
+              <p className="ob-doc-summary"><b>{g.duration}</b> — {g.description}</p>
+              <div className="ob-doc-grid">
                 <div>
                   <h3>Deliverable</h3>
                   <p>{g.deliverable}</p>
@@ -136,12 +124,11 @@ export default function EvaluationProgramPage() {
           ))}
         </div>
 
-        <div className="lp-svc-cta">
+        <div className="ob-doc-cta">
           <p>Start with the structured intake. The maintainer team will name the right gate.</p>
-          <a className="btn btn-primary lp-btn-lg" href="/contact">Start an evaluation</a>
+          <a className="ob-btn ob-btn-primary ob-btn-lg" href="/contact">Start an evaluation</a>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </EnterprisePageShell>
   );
 }

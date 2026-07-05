@@ -1,0 +1,278 @@
+/* ── Enterprise design system: content/doc pages ──────────────────────────
+   Shared by /services, /faq, /contact, /evaluation-program, /case-studies,
+   /privacy, /terms — everything that isn't the home route. Builds on the
+   tokens/type/buttons/nav/footer in enterprise-base.css. */
+
+.ob-doc {
+  padding: 64px 0 96px;
+}
+
+.ob-doc-wrap {
+  width: min(880px, calc(100% - 40px));
+  margin-inline: auto;
+}
+
+.ob-doc-hero {
+  margin-bottom: 48px;
+}
+
+.ob-doc-hero .ob-lead {
+  margin-top: 18px;
+  max-width: 720px;
+}
+
+.ob-doc-hero .ob-lead + .ob-lead {
+  margin-top: 14px;
+}
+
+.ob-doc-list {
+  display: grid;
+  gap: 20px;
+}
+
+.ob-doc-card {
+  padding: 32px;
+  border: 1px solid var(--ob-line);
+  border-radius: var(--ob-radius);
+  background: var(--ob-panel);
+  scroll-margin-top: 96px;
+}
+
+.ob-doc-card h2 {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 0 0 12px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.4rem;
+  color: var(--ob-ink);
+}
+
+.ob-doc-anchor {
+  flex-shrink: 0;
+  color: var(--ob-muted-2);
+  font: 600 0.76rem var(--font-mono), monospace;
+}
+
+.ob-doc-summary {
+  margin: 0 0 24px;
+  color: var(--ob-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.ob-doc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.ob-doc-grid h3 {
+  margin: 0 0 6px;
+  font-size: 0.86rem;
+  color: var(--ob-ink);
+}
+
+.ob-doc-grid p {
+  margin: 0;
+  color: var(--ob-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.ob-doc-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--ob-green);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.ob-doc-link:hover {
+  color: var(--ob-green-bright);
+}
+
+.ob-doc-links {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.ob-doc-links a {
+  color: var(--ob-green);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.ob-doc-links a:hover {
+  color: var(--ob-green-bright);
+}
+
+.ob-doc-section {
+  margin-top: 64px;
+}
+
+.ob-doc-section:first-of-type {
+  margin-top: 0;
+}
+
+.ob-doc-badge {
+  display: inline-block;
+  margin-right: 10px;
+  color: var(--ob-muted-2);
+  font: 700 0.9rem var(--font-mono), monospace;
+}
+
+.ob-doc-pills {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.ob-doc-pill {
+  padding: 7px 12px;
+  border: 1px solid var(--ob-line-strong);
+  border-radius: 999px;
+  color: var(--ob-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.ob-doc-cta {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--ob-line);
+  text-align: center;
+}
+
+.ob-doc-cta p {
+  margin: 0 0 20px;
+  color: var(--ob-muted);
+  font-size: 1rem;
+}
+
+@media (max-width: 700px) {
+  .ob-doc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ob-doc-card {
+    padding: 24px 20px;
+  }
+}
+
+/* ── forms ────────────────────────────────────────────────────────────── */
+
+.ob-form {
+  display: grid;
+  gap: 22px;
+  margin-top: 8px;
+}
+
+.ob-form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.ob-form-field label {
+  font-weight: 700;
+  color: var(--ob-ink);
+  font-size: 0.92rem;
+}
+
+.ob-form-field-required > label::after {
+  content: " *";
+  color: var(--ob-danger);
+}
+
+.ob-form input,
+.ob-form select,
+.ob-form textarea {
+  width: 100%;
+  border: 1px solid var(--ob-line-strong);
+  border-radius: 8px;
+  background: var(--ob-panel);
+  color: var(--ob-ink);
+  padding: 11px 12px;
+  font-size: 0.94rem;
+  accent-color: var(--ob-green);
+}
+
+.ob-form input::placeholder,
+.ob-form textarea::placeholder {
+  color: var(--ob-muted-2);
+}
+
+.ob-form select option {
+  background: var(--ob-bg-2);
+  color: var(--ob-ink);
+}
+
+.ob-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.ob-form-hint {
+  color: var(--ob-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.ob-form-radioset,
+.ob-form-checkset {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ob-form-radioset label,
+.ob-form-checkset label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px;
+  border: 1px solid var(--ob-line);
+  border-radius: 8px;
+  background: var(--ob-panel);
+  color: var(--ob-ink);
+  cursor: pointer;
+}
+
+.ob-form-radioset label:hover,
+.ob-form-checkset label:hover {
+  border-color: var(--ob-line-strong);
+}
+
+.ob-form-radioset input,
+.ob-form-checkset input {
+  width: auto;
+  margin-top: 0.2rem;
+  accent-color: var(--ob-green);
+}
+
+.ob-form-error {
+  border: 1px solid rgba(255, 155, 138, 0.4);
+  border-radius: 8px;
+  background: rgba(255, 155, 138, 0.08);
+  color: var(--ob-danger);
+  padding: 12px 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.ob-form button[type="submit"] {
+  justify-self: start;
+}
+
+@media (max-width: 560px) {
+  .ob-form-radioset,
+  .ob-form-checkset {
+    grid-template-columns: 1fr;
+  }
+}

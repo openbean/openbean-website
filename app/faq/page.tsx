@@ -6,7 +6,7 @@
 // service shape. Each answer points at the canonical document so the buyer
 // can verify it against the public source.
 
-import { Footer, TopBar } from "@/app/ui";
+import { EnterprisePageShell } from "@/app/ui/home";
 
 export const metadata = {
   title: "Enterprise FAQ — OpenBean",
@@ -51,7 +51,7 @@ const SECURITY: Q[] = [
   },
   {
     q: "Do you have a SOC 2 / HIPAA / ISO 27001 attestation?",
-    a: "OpenBean is an open-source engine operated by your own engineering team on your own infrastructure. The compliance posture of your OpenBean instance is the compliance posture of your own deployment, not OpenBean the project. The Professional Services catalog has a Security Review service (see the Services page) that walks your team's security questionnaire against OpenBean's documented properties; a third-party SOC 2 / HIPAA / ISO 27001 attestation is the customer's responsibility to commission separately, on the customer's own deployment.",
+    a: "It depends on the deployment model. Self-hosted, OpenBean is an open-source engine run by your own engineering team on your own infrastructure — the compliance posture is your deployment's, not OpenBean the project's. On managed hosting, OpenBean operates the infrastructure, so compliance is shared: we're responsible for the infrastructure layer, your organization stays responsible for its own governance policy and data-handling decisions. Either way, the Professional Services catalog has a Security Review service (see the Services page) that walks your team's security questionnaire against OpenBean's documented properties; a third-party SOC 2 / HIPAA / ISO 27001 attestation is the customer's responsibility to commission separately.",
     links: [
       { label: "Professional Services — Security Review", href: "/services#security-review" },
     ],
@@ -79,7 +79,7 @@ const DEPLOYMENT: Q[] = [
   },
   {
     q: "Is there a hosted or cloud version?",
-    a: "No, and there will not be one. OpenBean is self-hosted permanently, by design — there is no OpenBean cloud account for your organization's knowledge to live in. The manifesto makes the argument: an organization's accumulated knowledge is among its most valuable assets, and the only acceptable place for something that valuable is infrastructure the organization itself controls.",
+    a: "Yes. Alongside the self-hosted path — your own infrastructure, your own credentials — OpenBean offers managed hosting for organizations that would rather not run the instance themselves. Trust works the same way in both models: your organization keeps governance and ownership of its data; managed hosting only changes who operates the infrastructure underneath it.",
   },
   {
     q: "Can we deploy fully on our own infrastructure, air-gapped?",
@@ -91,7 +91,7 @@ const DEPLOYMENT: Q[] = [
   },
   {
     q: "What happens to our data if OpenBean the project stops existing?",
-    a: "Nothing happens to it. It was never on the project's infrastructure. Your Postgres database, your application deployment, and your credentials keep working exactly as they do today. The whole engine is MIT-licensed source you can fork and continue running as-is, with or without the maintainer team.",
+    a: "If you're self-hosted, nothing happens to it — it was never on our infrastructure, and your database, application deployment, and credentials keep working exactly as they do today. The whole engine is MIT-licensed source you can fork and run as-is, with or without the maintainer team. If you're on managed hosting, your contract names the data-export and transition path; you can always export to a self-hosted instance you control.",
   },
   {
     q: "What is the recovery story if something goes wrong?",
@@ -154,7 +154,7 @@ const BUSINESS: Q[] = [
   },
   {
     q: "Is there a hosted, single-tenant, OpenBean-managed option?",
-    a: "No, and there will not be one. The manifesto's argument is that an organization's accumulated knowledge is among its most valuable assets, and the only acceptable place for that is infrastructure the organization itself controls. A hosted, single-tenant offering would invert that argument. The Professional Services Deployment Support and On-Premise Deployment engagements exist precisely so an organization that does not want to stand up OpenBean on its own hardware can have the maintainer team walk its own team through standing it up on its own infrastructure.",
+    a: "Yes. Managed hosting is single-tenant — your organization's data is never on shared infrastructure with another customer's, and you keep the same governance, audit trail, and data ownership as a self-hosted instance. If you'd rather run OpenBean yourselves instead, the Professional Services Deployment Support and On-Premise Deployment engagements exist so the maintainer team can walk your own engineers through standing up a self-hosted instance.",
   },
 ];
 
@@ -167,42 +167,30 @@ const SECTIONS: Array<{ id: string; title: string; description: string; items: Q
 
 export default function FaqPage() {
   return (
-    <div className="lp ent">
-      <TopBar
-        tag="platform"
-        right={
-          <nav className="lp-nav" aria-label="Page sections">
-            <a href="/#governance">Governance</a>
-            <a href="/#architecture">Architecture</a>
-            <a href="/#security">Security</a>
-            <a href="/#deployment">Deployment</a>
-            <a href="/evaluation-program">Evaluation program</a>
-            <a href="/services">Services</a>
-            <a className="btn" href="/contact">Talk to us</a>
-          </nav>
-        }
-      />
-      <main className="lp-services">
-        <p className="ent-eyebrow">Enterprise FAQ</p>
-        <h1>Specific answers to specific questions.</h1>
-        <p className="lede">
-          The landing page&rsquo;s FAQ is for a visitor deciding whether to read further. This FAQ
-          is for a security reviewer, procurement lead, or enterprise architect who has decided
-          to read further and now has specific, named questions. Each answer points at the
-          canonical public document so you can verify it against the source.
-        </p>
+    <EnterprisePageShell>
+      <div className="ob-wrap ob-doc-wrap">
+        <div className="ob-doc-hero">
+          <p className="ob-eyebrow">Enterprise FAQ</p>
+          <h1 className="ob-h1">Specific answers to specific questions.</h1>
+          <p className="ob-lead">
+            The landing page&rsquo;s FAQ is for a visitor deciding whether to read further. This FAQ
+            is for a security reviewer, procurement lead, or enterprise architect who has decided
+            to read further and now has specific, named questions. Each answer points at the
+            canonical public document so you can verify it against the source.
+          </p>
+        </div>
 
         {SECTIONS.map((section) => (
-          <section key={section.id} className="lp-faq-section" id={section.id}>
-            <h2 className="lp-h2" style={{ maxWidth: "none" }}>{section.title}</h2>
-            <p className="lede">{section.description}</p>
-            <div className="lp-faq-list">
+          <div key={section.id} className="ob-doc-section" id={section.id}>
+            <h2 className="ob-h2">{section.title}</h2>
+            <p className="ob-lead">{section.description}</p>
+            <div className="ob-doc-list">
               {section.items.map((item) => (
-                <article key={item.q} className="lp-faq-item">
+                <article key={item.q} className="ob-doc-card">
                   <h3>{item.q}</h3>
                   <p>{item.a}</p>
                   {item.links && item.links.length > 0 ? (
-                    <ul className="lp-faq-links">
+                    <ul className="ob-doc-links">
                       {item.links.map((l) => (
                         <li key={l.href}>
                           <a href={l.href}>{l.label} →</a>
@@ -213,15 +201,14 @@ export default function FaqPage() {
                 </article>
               ))}
             </div>
-          </section>
+          </div>
         ))}
 
-        <div className="lp-svc-cta">
+        <div className="ob-doc-cta">
           <p>Didn&rsquo;t find your question? Use the structured intake to ask it directly.</p>
-          <a className="btn btn-primary lp-btn-lg" href="/contact">Ask the maintainer team</a>
+          <a className="ob-btn ob-btn-primary ob-btn-lg" href="/contact">Ask the maintainer team</a>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </EnterprisePageShell>
   );
 }

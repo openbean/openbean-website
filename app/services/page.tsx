@@ -8,7 +8,7 @@
 // Pilot Program, and Support are the new ones. Customer responsibilities and
 // OpenBean responsibilities are now in the grid alongside the others.
 
-import { Footer, TopBar } from "@/app/ui";
+import { EnterprisePageShell } from "@/app/ui/home";
 
 export const metadata = {
   title: "Professional Services — OpenBean",
@@ -141,45 +141,33 @@ const SERVICES: Service[] = [
 
 export default function ServicesPage() {
   return (
-    <div className="lp ent">
-      <TopBar
-        tag="platform"
-        right={
-          <nav className="lp-nav" aria-label="Page sections">
-            <a href="/#governance">Governance</a>
-            <a href="/#architecture">Architecture</a>
-            <a href="/#security">Security</a>
-            <a href="/#deployment">Deployment</a>
-            <a href="/evaluation-program">Evaluation program</a>
-            <a href="/services">Services</a>
-            <a className="btn" href="/contact">Talk to us</a>
-          </nav>
-        }
-      />
-      <main className="lp-services">
-        <p className="ent-eyebrow">Professional Services</p>
-        <h1>Engagement shapes for organizations that want help.</h1>
-        <p className="lede">
-          OpenBean is designed to be run by your own engineers. For teams that want help with
-          a production rollout, the maintainer team offers nine named engagements. Each has
-          a deliverable, an exit condition, and a clear split of customer and OpenBean
-          responsibilities — paid against the deliverable, not against hours.
-        </p>
-        <p className="lede">
-          Pricing is not on this page. A scoped engagement produces a real number; a templated
-          number produces a templated engagement. Conversations that don&rsquo;t fit one of the
-          shapes below are answered in writing rather than forced into the nearest one.
-        </p>
+    <EnterprisePageShell>
+      <div className="ob-wrap ob-doc-wrap">
+        <div className="ob-doc-hero">
+          <p className="ob-eyebrow">Professional Services</p>
+          <h1 className="ob-h1">Engagement shapes for organizations that want help.</h1>
+          <p className="ob-lead">
+            OpenBean is designed to be run by your own engineers. For teams that want help with
+            a production rollout, the maintainer team offers nine named engagements. Each has
+            a deliverable, an exit condition, and a clear split of customer and OpenBean
+            responsibilities — paid against the deliverable, not against hours.
+          </p>
+          <p className="ob-lead">
+            Pricing is not on this page. A scoped engagement produces a real number; a templated
+            number produces a templated engagement. Conversations that don&rsquo;t fit one of the
+            shapes below are answered in writing rather than forced into the nearest one.
+          </p>
+        </div>
 
-        <div className="lp-svc-list">
+        <div className="ob-doc-list">
           {SERVICES.map((s) => (
-            <article key={s.id} className="lp-svc" id={s.id}>
+            <article key={s.id} className="ob-doc-card" id={s.id}>
               <h2>
                 {s.name}
-                <span className="anchor">#{s.id}</span>
+                <span className="ob-doc-anchor">#{s.id}</span>
               </h2>
-              <p className="summary">{s.summary}</p>
-              <div className="grid">
+              <p className="ob-doc-summary">{s.summary}</p>
+              <div className="ob-doc-grid">
                 <div>
                   <h3>For</h3>
                   <p>{s.for_}</p>
@@ -213,12 +201,11 @@ export default function ServicesPage() {
           ))}
         </div>
 
-        <div className="lp-svc-cta">
+        <div className="ob-doc-cta">
           <p>Engagements start with the same structured intake as everything else.</p>
-          <a className="btn btn-primary lp-btn-lg" href="/contact">Start a conversation</a>
+          <a className="ob-btn ob-btn-primary ob-btn-lg" href="/contact">Start a conversation</a>
         </div>
-      </main>
-      <Footer />
-    </div>
+      </div>
+    </EnterprisePageShell>
   );
 }

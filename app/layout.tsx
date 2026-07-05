@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "@/app/ui/tokens.css";
-import "@/app/ui/landing.css";
+import "@/app/ui/home/enterprise-base.css";
 
 const bodyFont = Inter({
   subsets: ["latin"],

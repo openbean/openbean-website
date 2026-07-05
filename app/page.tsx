@@ -8,6 +8,9 @@ import {
   FinalCTA,
   EnterpriseFooter,
 } from "@/app/ui/home";
+// The home route composes the nav/footer directly (rather than via
+// EnterprisePageShell) because its sections sit flush against the nav/footer
+// with no shared <main> padding — every other page uses the shell.
 
 export default function Home() {
   return (

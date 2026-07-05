@@ -272,8 +272,8 @@ export function ContactForm() {
   };
 
   return (
-    <form className="lp-contact-form" onSubmit={onSubmit} noValidate>
-      <div className="lp-field lp-field-required">
+    <form className="ob-form" onSubmit={onSubmit} noValidate>
+      <div className="ob-form-field ob-form-field-required">
         <label htmlFor="contact-name">Your name</label>
         <input
           id="contact-name"
@@ -286,7 +286,7 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label htmlFor="contact-email">Work email</label>
         <input
           id="contact-email"
@@ -298,24 +298,24 @@ export function ContactForm() {
           onBlur={() => setTouched(true)}
           autoComplete="email"
         />
-        <span className="hint">
+        <span className="ob-form-hint">
           A corporate address is the strongest signal of an active evaluation. We don't subscribe
           you to anything or share the address; the reply is the only thing the form produces.
         </span>
         {emailInvalid ? (
-          <span className="hint" style={{ color: "var(--danger)" }}>
+          <span className="ob-form-hint" style={{ color: "var(--ob-danger)" }}>
             That email address doesn't look right — check the formatting.
           </span>
         ) : null}
         {showFreeMailNotice ? (
-          <span className="hint" style={{ color: "var(--accent-ink)" }}>
+          <span className="ob-form-hint" style={{ color: "var(--ob-green)" }}>
             A free webmail address is fine if that's right for you; we just want to be sure the
             form's promise (a real reply) lands somewhere you actually read.
           </span>
         ) : null}
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label htmlFor="contact-org">Organization</label>
         <input
           id="contact-org"
@@ -328,7 +328,7 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label htmlFor="contact-industry">Industry</label>
         <select
           id="contact-industry"
@@ -341,10 +341,10 @@ export function ContactForm() {
             <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
-        <span className="hint">Used to anticipate the compliance and architecture conversation, not to filter you out.</span>
+        <span className="ob-form-hint">Used to anticipate the compliance and architecture conversation, not to filter you out.</span>
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label htmlFor="contact-company-size">Company size</label>
         <select
           id="contact-company-size"
@@ -357,10 +357,10 @@ export function ContactForm() {
             <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
-        <span className="hint">A band, not a headcount — used to size the right engagement shape, not to score you.</span>
+        <span className="ob-form-hint">A band, not a headcount — used to size the right engagement shape, not to score you.</span>
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label htmlFor="contact-role">Your role</label>
         <input
           id="contact-role"
@@ -371,13 +371,13 @@ export function ContactForm() {
           onChange={(e) => setState((s) => ({ ...s, role: e.target.value }))}
           placeholder="CTO, platform engineer, security lead, ..."
         />
-        <span className="hint">
+        <span className="ob-form-hint">
           A free-text role, not a single-select — the answer tells the operator whether to
           route the reply to engineering, sales, or security.
         </span>
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label htmlFor="contact-decision-maker">Who signs off on the eventual decision?</label>
         <select
           id="contact-decision-maker"
@@ -390,12 +390,12 @@ export function ContactForm() {
             <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
-        <span className="hint">Determines whether the reply goes to engineering, the requester, or a named executive; whether a calendar invite is the right shape or a written reply is.</span>
+        <span className="ob-form-hint">Determines whether the reply goes to engineering, the requester, or a named executive; whether a calendar invite is the right shape or a written reply is.</span>
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label>What brings you here?</label>
-        <div className="lp-radioset">
+        <div className="ob-form-radioset">
           {INTENT_OPTIONS.map((opt) => (
             <label key={opt.value}>
               <input
@@ -408,17 +408,17 @@ export function ContactForm() {
               <span>
                 <b>{opt.label}</b>
                 <br />
-                <span style={{ color: "var(--muted)", fontSize: "0.8rem" }}>{opt.help}</span>
+                <span style={{ color: "var(--ob-muted)", fontSize: "0.8rem" }}>{opt.help}</span>
               </span>
             </label>
           ))}
         </div>
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label>Where would OpenBean run?</label>
-        <span className="hint">Select all that apply.</span>
-        <div className="lp-checkset">
+        <span className="ob-form-hint">Select all that apply.</span>
+        <div className="ob-form-checkset">
           {DEPLOYMENT_OPTIONS.map((opt) => (
             <label key={opt.value}>
               <input
@@ -433,10 +433,10 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="lp-field">
+      <div className="ob-form-field">
         <label>Which AI tools are you using today? (optional)</label>
-        <span className="hint">Helps us point you at the right Connection setup guidance.</span>
-        <div className="lp-checkset">
+        <span className="ob-form-hint">Helps us point you at the right Connection setup guidance.</span>
+        <div className="ob-form-checkset">
           {AI_TOOL_OPTIONS.map((opt) => (
             <label key={opt.value}>
               <input
@@ -451,10 +451,10 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="lp-field">
+      <div className="ob-form-field">
         <label>What infrastructure does your organization already run? (optional)</label>
-        <span className="hint">Determines whether the deployment conversation starts with a managed-service path or an on-prem / dedicated-server path.</span>
-        <div className="lp-checkset">
+        <span className="ob-form-hint">Determines whether the deployment conversation starts with a managed-service path or an on-prem / dedicated-server path.</span>
+        <div className="ob-form-checkset">
           {INFRA_OPTIONS.map((opt) => (
             <label key={opt.value}>
               <input
@@ -469,10 +469,10 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label>Compliance or regulatory requirements?</label>
-        <span className="hint">Select all that apply.</span>
-        <div className="lp-checkset">
+        <span className="ob-form-hint">Select all that apply.</span>
+        <div className="ob-form-checkset">
           {COMPLIANCE_OPTIONS.map((opt) => (
             <label key={opt.value}>
               <input
@@ -487,7 +487,7 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="lp-field">
+      <div className="ob-form-field">
         <label htmlFor="contact-connections">How many AI tools / Connections would you expect to integrate?</label>
         <input
           id="contact-connections"
@@ -500,7 +500,7 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label htmlFor="contact-budget">Budget stage</label>
         <select
           id="contact-budget"
@@ -513,12 +513,12 @@ export function ContactForm() {
             <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
-        <span className="hint">Phrased as a single-select with an explicit "rather not say" so the question does not feel like a sales funnel.</span>
+        <span className="ob-form-hint">Phrased as a single-select with an explicit "rather not say" so the question does not feel like a sales funnel.</span>
       </div>
 
-      <div className="lp-field lp-field-required">
+      <div className="ob-form-field ob-form-field-required">
         <label>When are you aiming to decide?</label>
-        <div className="lp-radioset">
+        <div className="ob-form-radioset">
           {TIMELINE_OPTIONS.map((opt) => (
             <label key={opt.value}>
               <input
@@ -534,7 +534,7 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="lp-field">
+      <div className="ob-form-field">
         <label htmlFor="contact-notes">Anything else we should know?</label>
         <textarea
           id="contact-notes"
@@ -543,13 +543,13 @@ export function ContactForm() {
           onChange={(e) => setState((s) => ({ ...s, notes: e.target.value }))}
           placeholder="Optional. The real constraint is often in the one sentence no field can hold."
         />
-        <span className="hint">{state.notes.length} / {MAX_NOTES}</span>
+        <span className="ob-form-hint">{state.notes.length} / {MAX_NOTES}</span>
       </div>
 
-      {error ? <div className="lp-contact-error" role="alert">{error}</div> : null}
+      {error ? <div className="ob-form-error" role="alert">{error}</div> : null}
 
-      <button type="submit">Send to the OpenBean team</button>
-      <span className="hint">
+      <button type="submit" className="ob-btn ob-btn-primary ob-btn-lg" style={{ justifySelf: "start" }}>Send to the OpenBean team</button>
+      <span className="ob-form-hint">
         Submitting opens your mail client with the answers pre-formatted. The maintainer
         team reads the email and replies within one business day. Nothing is stored, sold,
         or used for anything other than this conversation.

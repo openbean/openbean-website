@@ -4,7 +4,7 @@ import { IconArrowRight, IconPlay, IconServer, IconSeal, IconEnterpriseBuilding 
 const REQUEST_DEMO = "/contact?intent=demo";
 
 const TRUST_ITEMS = [
-  { icon: IconServer, title: "Your data stays yours", body: "Deploy on-prem or in your private cloud." },
+  { icon: IconServer, title: "Your data stays yours", body: "Deploy on-prem, in your private cloud, or on our managed hosting." },
   { icon: IconSeal, title: "Trusted & verified", body: "Every memory has a source. Every claim can be checked." },
   { icon: IconEnterpriseBuilding, title: "Built for enterprise", body: "Security, compliance, and control at every layer." },
 ];

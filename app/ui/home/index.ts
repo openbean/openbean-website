@@ -1,4 +1,5 @@
 export { EnterpriseNav } from "./EnterpriseNav";
+export { EnterprisePageShell } from "./EnterprisePageShell";
 export { HeroSection } from "./HeroSection";
 export { MemoryFlowDiagram } from "./MemoryFlowDiagram";
 export { ProblemSolutionSection } from "./ProblemSolutionSection";
