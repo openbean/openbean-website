@@ -11,12 +11,13 @@ const INDUSTRIES = [
 
 export function IndustryStrip() {
   return (
-    <section className="ob-section ob-industry">
-      <div className="ob-wrap">
-        <h2 className="ob-h2" style={{ marginInline: "auto", maxWidth: 640 }}>
-          Trusted by teams who value accuracy and control
-        </h2>
-        <div className="ob-industry-grid">
+    <section className="ob-wrap">
+      <div className="ob-industry-card">
+        <p className="ob-industry-heading">
+          Trusted by teams who<br />
+          <span className="ob-accent">value accuracy and control</span>
+        </p>
+        <div className="ob-industry-row">
           {INDUSTRIES.map(({ label, icon: Icon }) => (
             <div className="ob-industry-item" key={label}>
               <Icon width={26} height={26} />

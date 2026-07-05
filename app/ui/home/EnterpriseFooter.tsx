@@ -69,8 +69,8 @@ export function EnterpriseFooter() {
         </div>
 
         <div className="ob-footer-bottom">
-          <span>Your memory. Your rules. Your advantage.</span>
           <span>© {new Date().getFullYear()} OpenBean</span>
+          <span>Verified. Governed. Always up to date.</span>
         </div>
       </div>
     </footer>

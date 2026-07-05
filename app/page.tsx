@@ -2,7 +2,6 @@ import "@/app/ui/home/enterprise-home.css";
 import {
   EnterpriseNav,
   HeroSection,
-  TrustStrip,
   ProblemSolutionSection,
   IndustryStrip,
   WhyOpenBeanGrid,
@@ -15,9 +14,8 @@ export default function Home() {
     <div className="ob">
       <EnterpriseNav />
       <HeroSection />
-      <TrustStrip />
-      <ProblemSolutionSection />
       <IndustryStrip />
+      <ProblemSolutionSection />
       <WhyOpenBeanGrid />
       <FinalCTA />
       <EnterpriseFooter />

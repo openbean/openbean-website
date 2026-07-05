@@ -289,3 +289,30 @@ export function IconEnterpriseBuilding(props: SVGProps<SVGSVGElement>) {
     </Icon>
   );
 }
+
+// ── chrome: buttons, nav, dividers ──────────────────────────────────────
+export function IconArrowRight(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icon {...props}>
+      <path d="M4 12h16M13.5 5.5 20 12l-6.5 6.5" />
+    </Icon>
+  );
+}
+
+export function IconPlay(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icon {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M10.2 8.7v6.6l5.6-3.3z" fill="currentColor" stroke="none" />
+    </Icon>
+  );
+}
+
+export function IconChevronDown(props: SVGProps<SVGSVGElement>) {
+  return (
+    <Icon {...props} strokeWidth={1.8}>
+      <path d="M5.5 8.5 12 15l6.5-6.5" />
+    </Icon>
+  );
+}
+

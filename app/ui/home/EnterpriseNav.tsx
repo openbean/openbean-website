@@ -1,13 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { IconChevronDown } from "./icons";
 
-const LINKS = [
-  { href: "#solutions", label: "Solutions" },
-  { href: "#why-openbean", label: "Why OpenBean" },
-  { href: "/faq", label: "Resources" },
-  { href: "/services", label: "Services" },
-  { href: "/case-studies", label: "Company" },
+interface NavItem {
+  label: string;
+  href?: string;
+  children?: Array<{ label: string; href: string }>;
+}
+
+const LINKS: NavItem[] = [
+  {
+    label: "Solutions",
+    href: "#solutions",
+    children: [
+      { label: "AI agent memory", href: "/#why-openbean" },
+      { label: "Work app integration", href: "/#solutions" },
+      { label: "Enterprise search", href: "/#why-openbean" },
+      { label: "Team knowledge", href: "/#solutions" },
+    ],
+  },
+  { label: "Why OpenBean", href: "#why-openbean" },
+  {
+    label: "Resources",
+    href: "/faq",
+    children: [
+      { label: "FAQ", href: "/faq" },
+      { label: "Case studies", href: "/case-studies" },
+      { label: "Evaluation program", href: "/evaluation-program" },
+    ],
+  },
+  { label: "Services", href: "/services" },
+  {
+    label: "Company",
+    href: "/case-studies",
+    children: [
+      { label: "Contact", href: "/contact" },
+      { label: "Talk to an expert", href: "/contact?intent=expert" },
+      { label: "Request a demo", href: "/contact?intent=demo" },
+    ],
+  },
 ];
 
 const REQUEST_DEMO = "/contact?intent=demo";
@@ -15,9 +47,29 @@ const TALK_TO_EXPERT = "/contact?intent=expert";
 
 export function EnterpriseNav() {
   const [open, setOpen] = useState(false);
+  const [dropdown, setDropdown] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    function onDocEvent(e: MouseEvent | KeyboardEvent) {
+      if (e instanceof KeyboardEvent && e.key === "Escape") {
+        setDropdown(null);
+        return;
+      }
+      if (e instanceof MouseEvent && navRef.current && !navRef.current.contains(e.target as Node)) {
+        setDropdown(null);
+      }
+    }
+    document.addEventListener("mousedown", onDocEvent);
+    document.addEventListener("keydown", onDocEvent);
+    return () => {
+      document.removeEventListener("mousedown", onDocEvent);
+      document.removeEventListener("keydown", onDocEvent);
+    };
+  }, []);
 
   return (
-    <header className="ob-nav">
+    <header className="ob-nav" ref={navRef}>
       <div className="ob-wrap ob-nav-inner">
         <a className="ob-nav-brand" href="/" aria-label="OpenBean home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -26,9 +78,29 @@ export function EnterpriseNav() {
         </a>
 
         <nav className="ob-nav-links" aria-label="Primary">
-          {LINKS.map((l) => (
-            <a key={l.href} href={l.href}>{l.label}</a>
-          ))}
+          {LINKS.map((item) =>
+            item.children ? (
+              <div className="ob-nav-item" key={item.label}>
+                <button
+                  type="button"
+                  className="ob-nav-item-trigger"
+                  aria-expanded={dropdown === item.label}
+                  aria-haspopup="true"
+                  onClick={() => setDropdown((d) => (d === item.label ? null : item.label))}
+                >
+                  {item.label}
+                  <IconChevronDown width={13} height={13} />
+                </button>
+                <div className="ob-nav-dropdown" data-open={dropdown === item.label} role="menu">
+                  {item.children.map((c) => (
+                    <a href={c.href} key={c.label} role="menuitem" onClick={() => setDropdown(null)}>{c.label}</a>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <a key={item.label} href={item.href}>{item.label}</a>
+            )
+          )}
         </nav>
 
         <div className="ob-nav-cta">
@@ -52,8 +124,8 @@ export function EnterpriseNav() {
       </div>
 
       <div id="ob-nav-mobile-panel" className="ob-wrap ob-nav-mobile" data-open={open}>
-        {LINKS.map((l) => (
-          <a key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</a>
+        {LINKS.map((item) => (
+          <a key={item.label} href={item.href ?? item.children?.[0]?.href ?? "#"} onClick={() => setOpen(false)}>{item.label}</a>
         ))}
         <div className="ob-nav-mobile-cta">
           <a className="ob-btn" href={REQUEST_DEMO} onClick={() => setOpen(false)}>Request Demo</a>

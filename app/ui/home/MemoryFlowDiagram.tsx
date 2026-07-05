@@ -11,6 +11,7 @@ import {
   IconWorkApp,
   IconDatabase,
   IconTool,
+  IconShieldCheck,
 } from "./icons";
 
 const SOURCES = [
@@ -36,15 +37,16 @@ export function MemoryFlowDiagram() {
     <figure
       className="ob-diagram"
       role="img"
-      aria-label="Diagram: documents, conversations, decisions, policies, projects, and knowledge flow into OpenBean, the trusted memory layer, which then feeds AI agents, AI assistants, search, work apps, databases, and custom tools. A status bar below reads verified, governed, always up to date."
+      aria-label="Diagram: documents, conversations, decisions, policies, projects, and knowledge flow into OpenBean, the trusted memory layer, which then feeds AI agents, AI assistants, search, work apps, databases, and custom tools. A status card below reads verified, governed, always up to date."
     >
+      <div className="ob-diagram-mesh" aria-hidden="true" />
       <div className="ob-diagram-row">
         <div className="ob-diagram-col sources">
-          <span className="ob-diagram-col-label">Business sources</span>
+          <span className="ob-diagram-col-label">Your business information</span>
           <div className="ob-pill-row">
             {SOURCES.map(({ label, icon: Icon }) => (
               <span className="ob-pill" key={label}>
-                <Icon width={16} height={16} />
+                <span className="ob-pill-icon"><Icon width={15} height={15} /></span>
                 {label}
               </span>
             ))}
@@ -54,24 +56,22 @@ export function MemoryFlowDiagram() {
         <div className="ob-diagram-center">
           <div className="ob-mark-wrap">
             <div className="ob-mark-glow" />
-            <div className="ob-mark-ring r3" />
-            <div className="ob-mark-ring r2" />
             <div className="ob-mark-ring r1" />
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="ob-mark-img" src="/mark-transparent.png" alt="" width={60} height={60} />
+            <img className="ob-mark-img" src="/mark-transparent.png" alt="" width={48} height={48} />
           </div>
-          <p className="ob-mark-caption">
-            <b>OpenBean</b>
-            <span>Trusted memory layer</span>
-          </p>
+          <div className="ob-status-card">
+            <span className="ob-status-card-icon"><IconShieldCheck width={18} height={18} /></span>
+            <p>Verified. Governed.<br />Always up to date.</p>
+          </div>
         </div>
 
         <div className="ob-diagram-col destinations">
-          <span className="ob-diagram-col-label">Where memory is used</span>
+          <span className="ob-diagram-col-label">Used across your tools</span>
           <div className="ob-pill-row">
             {DESTINATIONS.map(({ label, icon: Icon }) => (
               <span className="ob-pill" key={label}>
-                <Icon width={16} height={16} />
+                <span className="ob-pill-icon"><Icon width={15} height={15} /></span>
                 {label}
               </span>
             ))}
@@ -81,12 +81,6 @@ export function MemoryFlowDiagram() {
 
       <div className="ob-diagram-arrow" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round"><path d="M12 4v16M6 14l6 6 6-6" /></svg>
-      </div>
-
-      <div className="ob-status-bar">
-        <span className="ob-status-item"><span className="ob-status-dot" />Verified</span>
-        <span className="ob-status-item"><span className="ob-status-dot" />Governed</span>
-        <span className="ob-status-item"><span className="ob-status-dot" />Always up to date</span>
       </div>
     </figure>
   );

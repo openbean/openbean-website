@@ -37,12 +37,14 @@ export function WhyOpenBeanGrid() {
   return (
     <section className="ob-section" id="why-openbean">
       <div className="ob-wrap">
-        <p className="ob-eyebrow">Why OpenBean</p>
-        <h2 className="ob-h2">Built for the way modern organizations work</h2>
+        <p className="ob-eyebrow" style={{ justifyContent: "center", display: "flex" }}>Why OpenBean</p>
+        <h2 className="ob-h2 ob-center">
+          Built for the way <span className="ob-accent">modern organizations</span> work
+        </h2>
         <div className="ob-why-grid">
           {CARDS.map(({ icon: Icon, title, body }) => (
             <div className="ob-why-card" key={title}>
-              <span className="ob-why-icon"><Icon width={22} height={22} /></span>
+              <span className="ob-why-icon"><Icon width={24} height={24} /></span>
               <h3>{title}</h3>
               <p>{body}</p>
             </div>
