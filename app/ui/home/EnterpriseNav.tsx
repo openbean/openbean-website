@@ -42,7 +42,6 @@ const LINKS: NavItem[] = [
   },
 ];
 
-const REQUEST_DEMO = "/contact?intent=demo";
 const TALK_TO_EXPERT = "/contact?intent=expert";
 
 export function EnterpriseNav() {
@@ -104,7 +103,6 @@ export function EnterpriseNav() {
         </nav>
 
         <div className="ob-nav-cta">
-          <a className="ob-btn ob-btn-sm" href={REQUEST_DEMO}>Request Demo</a>
           <a className="ob-btn ob-btn-primary ob-btn-sm ob-nav-cta-primary" href={TALK_TO_EXPERT}>Talk to an Expert</a>
           <button
             type="button"
@@ -128,7 +126,6 @@ export function EnterpriseNav() {
           <a key={item.label} href={item.href ?? item.children?.[0]?.href ?? "#"} onClick={() => setOpen(false)}>{item.label}</a>
         ))}
         <div className="ob-nav-mobile-cta">
-          <a className="ob-btn" href={REQUEST_DEMO} onClick={() => setOpen(false)}>Request Demo</a>
           <a className="ob-btn ob-btn-primary" href={TALK_TO_EXPERT} onClick={() => setOpen(false)}>Talk to an Expert</a>
         </div>
       </div>

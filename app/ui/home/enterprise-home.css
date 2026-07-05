@@ -116,10 +116,10 @@
   gap: 8px;
   min-height: 44px;
   padding: 0 20px;
-  border: 1px solid var(--ob-line-strong);
+  border: 1.5px solid rgba(235, 245, 238, 0.45);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--ob-ink);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.94rem;
   cursor: pointer;
@@ -127,8 +127,9 @@
 }
 
 .ob-btn:hover {
-  border-color: var(--ob-green);
-  color: var(--ob-green-bright);
+  border-color: var(--ob-green-bright);
+  background: rgba(125, 211, 111, 0.12);
+  color: #ffffff;
 }
 
 .ob-btn-primary {
@@ -299,10 +300,6 @@
 
 @media (max-width: 900px) {
   .ob-nav-links {
-    display: none;
-  }
-
-  .ob-nav-cta .ob-btn:not(.ob-nav-cta-primary) {
     display: none;
   }
 
