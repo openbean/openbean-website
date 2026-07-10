@@ -28,6 +28,7 @@ const LINKS: NavItem[] = [
       { label: "FAQ", href: "/faq" },
       { label: "Case studies", href: "/case-studies" },
       { label: "Evaluation program", href: "/evaluation-program" },
+      { label: "Download", href: "/download" },
     ],
   },
   { label: "Services", href: "/services" },

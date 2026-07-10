@@ -42,31 +42,30 @@ interface Q {
 const SECURITY: Q[] = [
   {
     q: "Is the engine open source, and what license is it under?",
-    a: "Yes. The entire engine is MIT-licensed source. No feature is gated behind a proprietary tier; the source the maintainer team ships is the source that runs in your instance.",
+    a: "The engine is MIT-licensed, and every evaluating and customer team receives the full source. No feature is gated behind a proprietary tier; the source the maintainer team ships is the source that runs in your instance.",
     links: [
-      { label: "Architecture one-pager", href: "/docs/enterprise/ARCHITECTURE_OVERVIEW.md" },
+      { label: "Architecture one-pager", href: "https://github.com/openbean/openbean-docs/blob/main/docs/ARCHITECTURE_OVERVIEW.md" },
     ],
   },
   {
     q: "How is tenant isolation enforced?",
     a: "By Postgres row-level security policies on the `claims` table, enforced at the database layer rather than by application filtering. The same RLS wall protects the `tenant_users`, `scope_grants`, and `ai_identities` tables. The adversarial acceptance suite verifies the wall on every PR with a forged JWT — see CHECK 5b, 5c, 6, 8.",
     links: [
-      { label: "Architecture overview", href: "/docs/enterprise/ARCHITECTURE_OVERVIEW.md" },
-      { label: "Engine spec (security §)", href: "/docs/architecture/OPENBEAN.md#12-security" },
+      { label: "Architecture overview", href: "https://github.com/openbean/openbean-docs/blob/main/docs/ARCHITECTURE_OVERVIEW.md" },
     ],
   },
   {
     q: "How are AI tool connections authenticated?",
     a: "Two ways. Local connections use the engine's service-role key, scoped by a per-connection `OPENBEAN_PRINCIPAL` value. Remote connections use a hashed, revocable API key checked on every request, against a `kind='service'` row in `ai_identities`. Revocation takes effect on the very next request, on every access path — not just on writes.",
     links: [
-      { label: "AI identity spec", href: "/docs/specs/002-ai-identity-lifecycle.md" },
+      { label: "Security model", href: "/security" },
     ],
   },
   {
     q: "Is the source available for our security team to review?",
-    a: "All of it. The engine, the governance gate, the RLS policies, and the MCP protocol implementation are MIT-licensed in the public repository. Every invariant is verified by the adversarial acceptance suite on every PR; the CHECK numbers are part of the documentation.",
+    a: "All of it. The engine, the governance gate, the RLS policies, and the MCP protocol implementation are MIT-licensed and provided in full to your security team as part of an evaluation. Every invariant is verified by the adversarial acceptance suite on every PR; the CHECK numbers are part of the documentation.",
     links: [
-      { label: "README — Invariants", href: "/" },
+      { label: "Security model", href: "/security" },
     ],
   },
   {
@@ -80,7 +79,7 @@ const SECURITY: Q[] = [
     q: "What does the adversarial acceptance suite actually test?",
     a: "Every structural invariant the engine makes: append-only integrity, scope isolation, tenant isolation, the trust root (session tenant minted only from verified membership), the materialized-view leak seal, the gate's branch logic, the tenant-stamping trigger, and the revocation enforcement. 40+ checks, run on every PR against a real Postgres stack. The CHECK numbers are part of the architecture overview.",
     links: [
-      { label: "Architecture overview — numbers", href: "/docs/enterprise/ARCHITECTURE_OVERVIEW.md" },
+      { label: "Architecture overview — numbers", href: "https://github.com/openbean/openbean-docs/blob/main/docs/ARCHITECTURE_OVERVIEW.md" },
     ],
   },
   {
@@ -94,7 +93,7 @@ const DEPLOYMENT: Q[] = [
     q: "What deployment targets are supported today, and which are verified?",
     a: "Six targets are documented in the deployment guides: local development (Windows, macOS, Ubuntu WSL), fresh Ubuntu 24.04 VPS, Vercel + hosted Supabase, self-managed Postgres on a VPS or VM, dedicated server / on-prem Kubernetes, and fully on-premise / air-gapped. Local development and Vercel + hosted Supabase are Verified — exercised against a real host by the maintainer team. The remaining four are Designed — the procedure is correct against the application's interfaces, but the maintainer team has not yet run the procedure on a real host of that shape. Each Designed target names the verification gap explicitly in the guide.",
     links: [
-      { label: "Deployment guides", href: "/docs/enterprise/DEPLOYMENT_GUIDES.md" },
+      { label: "Deployment guides", href: "https://github.com/openbean/openbean-docs/blob/main/docs/DEPLOYMENT_GUIDES.md" },
     ],
   },
   {
@@ -105,7 +104,7 @@ const DEPLOYMENT: Q[] = [
     q: "Can we deploy fully on our own infrastructure, air-gapped?",
     a: "Architecturally, yes — nothing in the design is tied to a specific cloud vendor. Today's fully documented and tested path is the application plus a Postgres database you provision and hold the credentials to. A from-scratch, zero-external-dependency deployment guide is designed in the deployment guides; the maintainer team has not yet exercised it on a real air-gapped host, and the Professional Services Deployment Support or On-Premise Deployment engagements are the right shape for an organization that wants hands-on help standing one up.",
     links: [
-      { label: "Deployment guides — on-prem", href: "/docs/enterprise/DEPLOYMENT_GUIDES.md" },
+      { label: "Deployment guides — on-prem", href: "https://github.com/openbean/openbean-docs/blob/main/docs/DEPLOYMENT_GUIDES.md" },
       { label: "Professional Services", href: "/services" },
     ],
   },
@@ -117,7 +116,7 @@ const DEPLOYMENT: Q[] = [
     q: "What is the recovery story if something goes wrong?",
     a: "Three pieces, all in the engine today: `npm run backup` produces a single archive of the entire instance (memory, accounts, connections, secrets); `npm run restore -- <archive>` restores it (prompts before overwriting; verified by drill on real data, not a unit test); `npm run doctor` runs eight health checks, each failure paired with its cause and the exact recovery command. Recovery is a documented, exercised path, not a sketch on a roadmap.",
     links: [
-      { label: "Deployment guides — verification", href: "/docs/enterprise/DEPLOYMENT_GUIDES.md" },
+      { label: "Deployment guides — verification", href: "https://github.com/openbean/openbean-docs/blob/main/docs/DEPLOYMENT_GUIDES.md" },
     ],
   },
   {

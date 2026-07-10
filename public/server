@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 # OpenBean Server Installer — the launcher shim.
 #
-# Served at https://openbean.xyz/install and
-# https://openbean.xyz/server — the two URLs carry
-# the same script. (The old source-checkout script
-# that used to live at /install moved to
-# https://openbean.xyz/dev-install; it is the
-# developer path, not the customer path.)
-#
 # This is the script the `curl | bash` flow
 # downloads. It is intentionally small. Its job
 # is to:

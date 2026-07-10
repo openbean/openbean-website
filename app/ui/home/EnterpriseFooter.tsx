@@ -14,6 +14,7 @@ const COLUMNS: Array<{ title: string; links: Array<{ label: string; href: string
       { label: "FAQ", href: "/faq" },
       { label: "Case studies", href: "/case-studies" },
       { label: "Evaluation program", href: "/evaluation-program" },
+      { label: "Download", href: "/download" },
     ],
   },
   {

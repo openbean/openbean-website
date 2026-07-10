@@ -1,0 +1,8 @@
+{
+  "schema": "openbean.release-manifest.v1",
+  "version": "0.1.0",
+  "channel": "alpha",
+  "released_at": null,
+  "artifacts": [],
+  "note": "Native installer artifacts are published with each tagged release. None are publicly available yet — OpenBean is in private alpha; installers are delivered through the evaluation program. Regenerate this file with scripts/update-release-manifest.mjs once public releases exist."
+}

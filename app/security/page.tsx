@@ -104,9 +104,9 @@ export default function SecurityPage() {
             </li>
             <li>
               <strong>The high-stakes approval queue.</strong> Configurable
-              governance policy: which categories are always held for
-              approval, which accumulate versus supersede, the trust floor
-              below which a change is quarantined.
+              approval rules: which categories are always held for a
+              person to approve, which accumulate versus replace, and the
+              confidence line below which a change is set aside for review.
             </li>
             <li>
               <strong>The per-company wall.</strong> Database-level
@@ -197,7 +197,7 @@ export default function SecurityPage() {
         <section className="ob-doc-section">
           <h2 className="ob-h2">Compliance posture</h2>
           <p>
-            OpenBean is an open-source engine operated by your engineering
+            OpenBean is an MIT-licensed engine operated by your engineering
             team on your infrastructure. The compliance posture of your
             OpenBean deployment is the compliance posture of your
             infrastructure.
@@ -217,37 +217,40 @@ export default function SecurityPage() {
           <ul>
             <li>
               <strong>Public security advisories.</strong>{" "}
-              <code>SECURITY.md</code> in the public repository.
+              <code>SECURITY.md</code> in the public{" "}
+              <a
+                href="https://github.com/openbean/openbean-docs/blob/main/SECURITY.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                openbean-docs
+              </a>{" "}
+              repository.
             </li>
             <li>
               <strong>Vulnerability reporting.</strong>{" "}
-              <code>SECURITY.md</code> in the public repository. The
+              <code>SECURITY.md</code> in the public{" "}
+              <a
+                href="https://github.com/openbean/openbean-docs/blob/main/SECURITY.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                openbean-docs
+              </a>{" "}
+              repository. The
               maintainer team responds within one business day to a
               private report.
             </li>
             <li>
-              <strong>Known limitations.</strong> See the engine repo’s{" "}
-              <a
-                href="https://github.com/openbean/openbean/blob/main/docs/enterprise/KNOWN_LIMITATIONS.md"
-                target="_blank"
-                rel="noreferrer"
-              >
-                docs/enterprise/KNOWN_LIMITATIONS.md
-              </a>
-              . Every limitation is named, with a workaround and a
-              target iteration.
+              <strong>Known limitations.</strong> A named Known
+              Limitations document — every limitation named, with a
+              workaround and a target iteration — is shared with every
+              evaluating team. Ask for it via <a href="/contact">contact</a>.
             </li>
             <li>
-              <strong>Roadmap for security work.</strong> See the engine
-              repo’s{" "}
-              <a
-                href="https://github.com/openbean/openbean/blob/main/docs/enterprise/V14_COMPLETION_REPORT.md"
-                target="_blank"
-                rel="noreferrer"
-              >
-                V14 completion report
-              </a>{" "}
-              and the V15+ briefs as they are written.
+              <strong>Roadmap for security work.</strong> Named in each
+              iteration&rsquo;s completion report, shared with evaluating
+              teams alongside the Known Limitations document.
             </li>
           </ul>
         </section>
@@ -257,7 +260,7 @@ export default function SecurityPage() {
           <ul>
             <li>
               <a
-                href="https://github.com/openbean/openbean/blob/main/docs/enterprise/ARCHITECTURE_OVERVIEW.md"
+                href="https://github.com/openbean/openbean-docs/blob/main/docs/ARCHITECTURE_OVERVIEW.md"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -266,39 +269,18 @@ export default function SecurityPage() {
             </li>
             <li>
               <a
-                href="https://github.com/openbean/openbean/blob/main/docs/architecture/OPENBEAN.md#12-security"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Engine spec — Security §
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/openbean/openbean/blob/main/docs/specs/002-ai-identity-lifecycle.md"
-                target="_blank"
-                rel="noreferrer"
-              >
-                AI identity lifecycle
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/openbean/openbean#invariants"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Adversarial acceptance suite — index
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/openbean/openbean/blob/main/docs/enterprise/DEPLOYMENT_GUIDES.md"
+                href="https://github.com/openbean/openbean-docs/blob/main/docs/DEPLOYMENT_GUIDES.md"
                 target="_blank"
                 rel="noreferrer"
               >
                 Deployment guides
               </a>
+            </li>
+            <li>
+              Engine spec, AI identity lifecycle, and the adversarial
+              acceptance suite — shared in source form with evaluating
+              teams under the <a href="/evaluation-program">evaluation
+              program</a>.
             </li>
             <li>
               <a href={SERVICES}>Professional Services — Security Review</a>

@@ -150,6 +150,58 @@
   text-align: center;
 }
 
+/* ── Download page ── */
+
+.ob-doc-meta {
+  margin-top: 16px;
+  color: var(--ob-muted-2);
+  font: 600 0.86rem var(--font-mono), monospace;
+}
+
+.ob-doc .ob-h3 {
+  margin: 28px 0 10px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.02rem;
+  color: var(--ob-ink);
+}
+
+.ob-doc pre {
+  margin: 12px 0;
+  padding: 16px 18px;
+  border: 1px solid var(--ob-line-strong);
+  border-radius: var(--ob-radius);
+  background: var(--ob-panel);
+  overflow-x: auto;
+}
+
+.ob-doc pre code {
+  font: 500 0.88rem var(--font-mono), monospace;
+  color: var(--ob-ink);
+  white-space: pre;
+}
+
+.ob-doc-artifacts {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.ob-doc-artifacts a {
+  color: var(--ob-green);
+  font-weight: 700;
+}
+
+.ob-doc-artifacts a:hover {
+  color: var(--ob-green-bright);
+}
+
+.ob-doc-artifacts code {
+  font: 500 0.8rem var(--font-mono), monospace;
+  color: var(--ob-muted-2);
+}
+
 .ob-doc-cta p {
   margin: 0 0 20px;
   color: var(--ob-muted);

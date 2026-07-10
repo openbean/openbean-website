@@ -34,7 +34,7 @@ export default function TermsPage() {
             <h2>The OpenBean engine has its own license</h2>
             <p className="ob-doc-summary" style={{ marginBottom: 0 }}>
               The OpenBean engine — the software your organization deploys and runs — is
-              MIT licensed in the public repository. That license, not this page, governs
+              MIT licensed. That license, not this page, governs
               your right to use, modify, and redistribute the software.
             </p>
           </article>
