@@ -70,7 +70,7 @@ const SECURITY: Q[] = [
   },
   {
     q: "Do you have a SOC 2 / HIPAA / ISO 27001 attestation?",
-    a: "It depends on the deployment model. Self-hosted, OpenBean is an open-source engine run by your own engineering team on your own infrastructure — the compliance posture is your deployment's, not OpenBean the project's. On managed hosting, OpenBean operates the infrastructure, so compliance is shared: we're responsible for the infrastructure layer, your organization stays responsible for its own governance policy and data-handling decisions. Either way, the Professional Services catalog has a Security Review service (see the Services page) that walks your team's security questionnaire against OpenBean's documented properties; a third-party SOC 2 / HIPAA / ISO 27001 attestation is the customer's responsibility to commission separately.",
+    a: "OpenBean is an MIT-licensed engine run by your own engineering team on your own infrastructure — the compliance posture is your deployment's, not OpenBean the project's. The Professional Services catalog has a Security Review service (see the Services page) that walks your team's security questionnaire against OpenBean's documented properties; a third-party SOC 2 / HIPAA / ISO 27001 attestation is the customer's responsibility to commission separately.",
     links: [
       { label: "Professional Services — Security Review", href: "/services#security-review" },
     ],
@@ -98,7 +98,10 @@ const DEPLOYMENT: Q[] = [
   },
   {
     q: "Is there a hosted or cloud version?",
-    a: "Yes. Alongside the self-hosted path — your own infrastructure, your own credentials — OpenBean offers managed hosting for organizations that would rather not run the instance themselves. Trust works the same way in both models: your organization keeps governance and ownership of its data; managed hosting only changes who operates the infrastructure underneath it.",
+    a: "No — self-hosting is the design, not a deployment option. Your company's knowledge lives on infrastructure you control, full stop. What OpenBean does operate is a small control plane (openbean cloud) for licensing, downloads, and support — it never holds your company's memory. Organizations that don't want to run the instance alone can buy hands-on help through Professional Services (Deployment Support, Support agreements), which keeps operations in your hands with our engineers alongside.",
+    links: [
+      { label: "Professional Services", href: "/services" },
+    ],
   },
   {
     q: "Can we deploy fully on our own infrastructure, air-gapped?",
@@ -110,7 +113,7 @@ const DEPLOYMENT: Q[] = [
   },
   {
     q: "What happens to our data if OpenBean the project stops existing?",
-    a: "If you're self-hosted, nothing happens to it — it was never on our infrastructure, and your database, application deployment, and credentials keep working exactly as they do today. The whole engine is MIT-licensed source you can fork and run as-is, with or without the maintainer team. If you're on managed hosting, your contract names the data-export and transition path; you can always export to a self-hosted instance you control.",
+    a: "Nothing happens to it — it was never on our infrastructure, and your database, application deployment, and credentials keep working exactly as they do today. The engine is MIT-licensed source you can fork and run as-is, with or without the maintainer team. Reading, searching, and exporting your knowledge never depends on us being reachable — not even on a license.",
   },
   {
     q: "What is the recovery story if something goes wrong?",
@@ -173,7 +176,18 @@ const BUSINESS: Q[] = [
   },
   {
     q: "Is there a hosted, single-tenant, OpenBean-managed option?",
-    a: "Yes. Managed hosting is single-tenant — your organization's data is never on shared infrastructure with another customer's, and you keep the same governance, audit trail, and data ownership as a self-hosted instance. If you'd rather run OpenBean yourselves instead, the Professional Services Deployment Support and On-Premise Deployment engagements exist so the maintainer team can walk your own engineers through standing up a self-hosted instance.",
+    a: "No. Self-hosting is the design: your organization's knowledge lives only on infrastructure you control. What exists instead is hands-on help — the Professional Services Deployment Support and On-Premise Deployment engagements walk your own engineers through standing up and operating a self-hosted instance, and a Support agreement keeps our engineers reachable afterward.",
+    links: [
+      { label: "Professional Services", href: "/services" },
+    ],
+  },
+  {
+    q: "How does licensing and evaluation work?",
+    a: "Licenses belong to your organization, not to individual users — there is no per-seat price and no usage metering. An evaluation license is free, runs 30 days, and restricts nothing: install, activate, connect your AI tools, invite the team, capture and recall at full capability. When it expires (after a 7-day grace window), the deployment becomes read-only: everything already captured stays readable, searchable, and exportable, and nothing is ever deleted. Activating a purchased license on the same deployment restores full functionality immediately — no reinstall, no migration.",
+  },
+  {
+    q: "Does activation work offline or air-gapped?",
+    a: "Yes. A license is a signed file bound to your deployment. You can download it from the portal on any machine and paste it into your server — the server verifies it locally against a pinned public key and never needs to call us. There is no phone-home requirement: an OpenBean deployment keeps working with zero network access to OpenBean the company.",
   },
 ];
 

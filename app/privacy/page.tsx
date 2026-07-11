@@ -84,12 +84,12 @@ export default function PrivacyPage() {
           <article className="ob-doc-card">
             <h2>Your data in your own OpenBean instance</h2>
             <p className="ob-doc-summary" style={{ marginBottom: 0 }}>
-              OpenBean is available self-hosted or as managed hosting. If you self-host, the
-              memory it stores lives in a database your organization provisions and controls
-              entirely — never on infrastructure we operate. If you use managed hosting, we
-              operate the infrastructure on your behalf, but the data itself stays yours: your
-              organization sets the governance policy, and access, retention, and deletion are
-              controlled by that policy, not by us.
+              OpenBean is self-hosted. The memory it stores lives in a database your
+              organization provisions and controls entirely — never on infrastructure we
+              operate. Licensing, downloads, and support run through a small OpenBean-operated
+              control plane, but it never holds your company&rsquo;s memory: your organization
+              sets the governance policy, and access, retention, and deletion are controlled
+              by you, not by us.
             </p>
           </article>
 

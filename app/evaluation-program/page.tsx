@@ -115,6 +115,13 @@ export default function EvaluationProgramPage() {
             close-out report the organization can use to inform its decision, not a quiet
             end-of-engagement.
           </p>
+          <p className="ob-lead">
+            Evaluations run on an evaluation license: free, 30 days, nothing restricted —
+            full capture, full recall, your whole team, all your AI tools. If it lapses,
+            your deployment becomes read-only and everything you captured stays readable
+            and exportable; a purchased license reactivates the same deployment instantly,
+            with no reinstall.
+          </p>
         </div>
 
         <div className="ob-doc-list">
