@@ -1,43 +1,32 @@
-// The V14 home page — the 14-section flow the V14 brief mandates:
-//  1. Hero
-//  2. Business Outcomes
-//  3. How It Works
-//  4. Why Companies Choose OpenBean
-//  5. Enterprise Security
-//  6. Deployment Options
-//  7. Company Brain
-//  8. Enterprise Demo
-//  9. Customer Journey
-// 10. Pricing Philosophy
-// 11. (FAQ lives at /faq; linked from nav)
-// 12. (Pricing philosophy section above already covers pricing)
-// 13. (Contact enterprise is the FinalCTA + EnterpriseFooter)
-// 14. (Footer is EnterpriseFooter)
+// The V17 home page — simplified from V14's fourteen sections to eight.
+// One promise carries the page: "Your company never loses what it knows."
 //
-// The CTA hierarchy is: "Request an Enterprise Demo" (primary) and
-// "Talk to an AI Advisor" (secondary). GitHub is not on the home page
-// primary CTAs; it lives in the EnterpriseFooter and the navigation's
-// Company menu, demoted to secondary.
+//  1. Nav          six flat links + Request Evaluation
+//  2. Hero         the promise + the Memory Lifecycle (signature element)
+//  3. Problem      twelve words
+//  4. How it works Remember → Review → Use
+//  5. Proof        one real screenshot + the live demo door
+//  6. Why OpenBean four benefits, one sentence each
+//  7. Security     "Your knowledge stays yours." + four chips
+//  8. Evaluation   honest 30-day terms → Final CTA → footer
+//
+// The audit, keep/merge/delete decisions, and copy rationale live in the
+// engine repo: docs/brand/08-HOMEPAGE_SIMPLIFICATION.md.
 
 import "@/app/ui/home/enterprise-home.css";
 import "@/app/ui/home/enterprise-v14.css";
+import "@/app/ui/home/enterprise-v17.css";
 import {
   EnterpriseNav,
   HeroSection,
-  ProblemSolutionSection,
-  IndustryStrip,
-  WhyOpenBeanGrid,
+  ProblemStrip,
+  HowItWorksSection,
+  ProofSection,
+  WhyOpenBeanSection,
+  EnterpriseSecuritySection,
+  EvaluationCTA,
   FinalCTA,
   EnterpriseFooter,
-  BusinessOutcomesSection,
-  HowItWorksSection,
-  WhyChooseSection,
-  EnterpriseSecuritySection,
-  DeploymentOptionsSection,
-  CompanyBrainSection,
-  EnterpriseDemoSection,
-  CustomerJourneySection,
-  PricingPhilosophySection,
 } from "@/app/ui/home";
 
 export default function Home() {
@@ -45,18 +34,12 @@ export default function Home() {
     <div className="ob">
       <EnterpriseNav />
       <HeroSection />
-      <BusinessOutcomesSection />
+      <ProblemStrip />
       <HowItWorksSection />
-      <WhyChooseSection />
-      <ProblemSolutionSection />
+      <ProofSection />
+      <WhyOpenBeanSection />
       <EnterpriseSecuritySection />
-      <DeploymentOptionsSection />
-      <CompanyBrainSection />
-      <IndustryStrip />
-      <EnterpriseDemoSection />
-      <CustomerJourneySection />
-      <PricingPhilosophySection />
-      <WhyOpenBeanGrid />
+      <EvaluationCTA />
       <FinalCTA />
       <EnterpriseFooter />
     </div>

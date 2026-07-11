@@ -12,6 +12,12 @@
   --ob-green: #7dd36f;
   --ob-green-bright: #a6f08a;
   --ob-green-dim: #3c5c3a;
+  /* Yellow is semantic, not decorative: the color of knowledge awaiting
+     a person's judgment. Green = trusted. The two brand colors encode
+     the product's review state machine. Use yellow ONLY for pending/
+     held-for-review states. */
+  --ob-yellow: #f5d76e;
+  --ob-yellow-dim: rgba(245, 215, 110, 0.16);
   --ob-ink: #f3f6f1;
   --ob-muted: #9aa89a;
   --ob-muted-2: #687567;

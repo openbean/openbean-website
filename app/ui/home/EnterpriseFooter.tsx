@@ -1,11 +1,11 @@
 const COLUMNS: Array<{ title: string; links: Array<{ label: string; href: string }> }> = [
   {
-    title: "Solutions",
+    title: "Product",
     links: [
-      { label: "AI agent memory", href: "/#why-openbean" },
-      { label: "Work app integration", href: "/#solutions" },
-      { label: "Enterprise search", href: "/#why-openbean" },
-      { label: "Team knowledge", href: "/#solutions" },
+      { label: "How it works", href: "/#how-it-works" },
+      { label: "Why OpenBean", href: "/#why-openbean" },
+      { label: "Live demo", href: "/demo" },
+      { label: "Security", href: "/security" },
     ],
   },
   {

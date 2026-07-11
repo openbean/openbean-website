@@ -1,76 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { IconChevronDown } from "./icons";
+// Simplified navigation: six flat links, one primary CTA, no dropdowns.
+// (The V14 nav had five dropdown groups; the simplification epic's rule
+// is that a visitor should never have to open a menu to find the door.)
 
-interface NavItem {
-  label: string;
-  href?: string;
-  children?: Array<{ label: string; href: string }>;
-}
+import { useState } from "react";
 
-const LINKS: NavItem[] = [
-  { label: "Why OpenBean", href: "#why-openbean" },
-  {
-    label: "Solutions",
-    href: "#solutions",
-    children: [
-      { label: "AI agent memory", href: "/#why-openbean" },
-      { label: "Work app integration", href: "/#solutions" },
-      { label: "Enterprise search", href: "/#why-openbean" },
-      { label: "Team knowledge", href: "/#solutions" },
-    ],
-  },
-  {
-    label: "Resources",
-    href: "/faq",
-    children: [
-      { label: "FAQ", href: "/faq" },
-      { label: "Case studies", href: "/case-studies" },
-      { label: "Evaluation program", href: "/evaluation-program" },
-      { label: "Download", href: "/download" },
-    ],
-  },
-  { label: "Services", href: "/services" },
-  {
-    label: "Company",
-    href: "/case-studies",
-    children: [
-      { label: "Contact", href: "/contact" },
-      { label: "Talk to an AI Advisor", href: "/contact?intent=advisor" },
-      { label: "Request an Enterprise Demo", href: "/contact?intent=demo" },
-    ],
-  },
+const LINKS: Array<{ label: string; href: string }> = [
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "Demo", href: "/demo" },
+  { label: "Security", href: "/security" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Download", href: "/download" },
 ];
 
-const REQUEST_DEMO = "/contact?intent=demo";
-const ADVISOR = "/contact?intent=advisor";
+const REQUEST_EVALUATION = "/contact?intent=demo";
 
 export function EnterpriseNav() {
   const [open, setOpen] = useState(false);
-  const [dropdown, setDropdown] = useState<string | null>(null);
-  const navRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    function onDocEvent(e: MouseEvent | KeyboardEvent) {
-      if (e instanceof KeyboardEvent && e.key === "Escape") {
-        setDropdown(null);
-        return;
-      }
-      if (e instanceof MouseEvent && navRef.current && !navRef.current.contains(e.target as Node)) {
-        setDropdown(null);
-      }
-    }
-    document.addEventListener("mousedown", onDocEvent);
-    document.addEventListener("keydown", onDocEvent);
-    return () => {
-      document.removeEventListener("mousedown", onDocEvent);
-      document.removeEventListener("keydown", onDocEvent);
-    };
-  }, []);
 
   return (
-    <header className="ob-nav" ref={navRef}>
+    <header className="ob-nav">
       <div className="ob-wrap ob-nav-inner">
         <a className="ob-nav-brand" href="/" aria-label="OpenBean home">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -79,34 +30,15 @@ export function EnterpriseNav() {
         </a>
 
         <nav className="ob-nav-links" aria-label="Primary">
-          {LINKS.map((item) =>
-            item.children ? (
-              <div className="ob-nav-item" key={item.label}>
-                <button
-                  type="button"
-                  className="ob-nav-item-trigger"
-                  aria-expanded={dropdown === item.label}
-                  aria-haspopup="true"
-                  onClick={() => setDropdown((d) => (d === item.label ? null : item.label))}
-                >
-                  {item.label}
-                  <IconChevronDown width={13} height={13} />
-                </button>
-                <div className="ob-nav-dropdown" data-open={dropdown === item.label} role="menu">
-                  {item.children.map((c) => (
-                    <a href={c.href} key={c.label} role="menuitem" onClick={() => setDropdown(null)}>{c.label}</a>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <a key={item.label} href={item.href}>{item.label}</a>
-            )
-          )}
+          {LINKS.map((item) => (
+            <a key={item.label} href={item.href}>{item.label}</a>
+          ))}
         </nav>
 
         <div className="ob-nav-cta">
-          <a className="ob-btn ob-btn-primary ob-btn-sm ob-nav-cta-primary" href={REQUEST_DEMO}>Request an Enterprise Demo</a>
-          <a className="ob-btn ob-btn-sm ob-nav-cta-secondary" href={ADVISOR}>Talk to an AI Advisor</a>
+          <a className="ob-btn ob-btn-primary ob-btn-sm ob-nav-cta-primary" href={REQUEST_EVALUATION}>
+            Request Evaluation
+          </a>
           <button
             type="button"
             className="ob-nav-toggle"
@@ -126,11 +58,12 @@ export function EnterpriseNav() {
 
       <div id="ob-nav-mobile-panel" className="ob-wrap ob-nav-mobile" data-open={open}>
         {LINKS.map((item) => (
-          <a key={item.label} href={item.href ?? item.children?.[0]?.href ?? "#"} onClick={() => setOpen(false)}>{item.label}</a>
+          <a key={item.label} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>
         ))}
         <div className="ob-nav-mobile-cta">
-          <a className="ob-btn ob-btn-primary" href={REQUEST_DEMO} onClick={() => setOpen(false)}>Request an Enterprise Demo</a>
-          <a className="ob-btn" href={ADVISOR} onClick={() => setOpen(false)}>Talk to an AI Advisor</a>
+          <a className="ob-btn ob-btn-primary" href={REQUEST_EVALUATION} onClick={() => setOpen(false)}>
+            Request Evaluation
+          </a>
         </div>
       </div>
     </header>
