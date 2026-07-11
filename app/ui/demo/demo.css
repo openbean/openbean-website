@@ -5,17 +5,35 @@
    business, trust, knowledge, decisions. */
 
 :root {
-  /* The four demo tokens. Tuned for enterprise confidence. */
-  --ob-people: #b87a3b;       /* warm amber — a person's name */
-  --ob-trust: #2b5a6e;        /* deep slate — trust, governance */
-  --ob-knowledge: #f3ede0;    /* warm off-white — a piece of knowledge */
-  --ob-decision: #3a6b3a;     /* deep green — a decision, a green light */
-  --ob-decision-soft: #e8f0e6;
-  --ob-people-soft: #f4ecdc;
-  --ob-trust-soft: #e4edf0;
+  /* The demo's category tokens, tuned for the DARK ob theme. (The V15
+     originals were light-theme pastels — bright mismatched chips on the
+     dark background.) Semantics follow the brand state machine:
+     yellow = awaiting a person's judgment, green = trusted/decided. */
+  --ob-people: #d9a468;                          /* warm amber — a person */
+  --ob-people-soft: rgba(217, 164, 104, 0.14);
+  --ob-trust: #86b8c9;                           /* cool slate — governance */
+  --ob-trust-soft: rgba(134, 184, 201, 0.13);
+  --ob-decision: #7dd36f;                        /* brand green — decided/trusted */
+  --ob-decision-soft: rgba(125, 211, 111, 0.13);
+  --ob-pending: #f5d76e;                         /* brand yellow — held for review */
+  --ob-pending-soft: rgba(245, 215, 110, 0.14);
+  --ob-warn: #ff9b8a;                            /* rejected / conflict */
+  --ob-warn-soft: rgba(255, 155, 138, 0.12);
+  --ob-neutral: #9aa89a;
+  --ob-neutral-soft: rgba(154, 168, 154, 0.12);
+  /* The card surface demo.css always assumed — it never existed until
+     now (nothing defined --ob-surface), which is why every demo card
+     rendered without a background. */
+  --ob-surface: #0d100e;
 }
 
 /* The demo chrome. */
+
+.ob-demo-shell {
+  background: var(--ob-bg);
+  color: var(--ob-ink);
+  min-height: 100vh;
+}
 
 .ob-demo {
   background: var(--ob-bg);
@@ -35,8 +53,9 @@
 .ob-demo-bar-inner {
   display: flex;
   align-items: center;
-  gap: 18px;
-  max-width: 1080px;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  max-width: 1160px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -79,17 +98,21 @@
   color: var(--ob-muted);
   font-size: 0.86rem;
   text-decoration: none;
-  padding: 4px 0;
+  padding: 5px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  transition: color 150ms ease, background-color 150ms ease;
 }
 
 .ob-demo-bar-nav a:hover {
   color: var(--ob-ink);
+  background: rgba(146, 196, 156, 0.08);
 }
 
 .ob-demo-bar-nav a[data-active="true"] {
   color: var(--ob-ink);
   font-weight: 600;
-  border-bottom: 2px solid var(--ob-trust);
+  background: rgba(125, 211, 111, 0.12);
 }
 
 .ob-demo-bar-cta {
@@ -380,19 +403,19 @@
   color: var(--ob-muted);
 }
 
-.ob-kn-tag[data-cat="policy"] { background: var(--ob-trust-soft); color: var(--ob-trust); border-color: var(--ob-trust); }
-.ob-kn-tag[data-cat="procedure"] { background: var(--ob-knowledge); color: #6a5a3a; border-color: #c4b394; }
-.ob-kn-tag[data-cat="decision"] { background: var(--ob-decision-soft); color: var(--ob-decision); border-color: var(--ob-decision); }
-.ob-kn-tag[data-cat="ai_proposal"] { background: var(--ob-people-soft); color: var(--ob-people); border-color: var(--ob-people); }
-.ob-kn-tag[data-cat="approved_change"] { background: var(--ob-decision-soft); color: var(--ob-decision); border-color: var(--ob-decision); }
-.ob-kn-tag[data-cat="rejected_proposal"] { background: #f4e0e0; color: #8a3a3a; border-color: #8a3a3a; }
-.ob-kn-tag[data-cat="historical"] { background: #e8e4dc; color: #6a5a3a; border-color: #c4b394; }
-.ob-kn-tag[data-cat="ai_recall"] { background: var(--ob-people-soft); color: var(--ob-people); border-color: var(--ob-people); }
-.ob-kn-tag[data-cat="manager_review"] { background: #ece8e0; color: #6a5a3a; border-color: #c4b394; }
-.ob-kn-tag[data-cat="correction"] { background: #f0e8e0; color: #6a5a3a; border-color: #c4b394; }
-.ob-kn-tag[data-cat="conflict"] { background: #f0e0e0; color: #8a3a3a; border-color: #8a3a3a; }
-.ob-kn-tag[data-cat="merge_history"] { background: #e4e8ec; color: #4a5a6a; border-color: #8a9aaa; }
-.ob-kn-tag[data-cat="audit"] { background: #ece8e0; color: #6a5a3a; border-color: #c4b394; }
+.ob-kn-tag[data-cat="policy"] { background: var(--ob-trust-soft); color: var(--ob-trust); border-color: rgba(134, 184, 201, 0.4); }
+.ob-kn-tag[data-cat="procedure"] { background: var(--ob-neutral-soft); color: var(--ob-neutral); border-color: rgba(154, 168, 154, 0.35); }
+.ob-kn-tag[data-cat="decision"] { background: var(--ob-decision-soft); color: var(--ob-decision); border-color: rgba(125, 211, 111, 0.4); }
+.ob-kn-tag[data-cat="ai_proposal"] { background: var(--ob-pending-soft); color: var(--ob-pending); border-color: rgba(245, 215, 110, 0.4); }
+.ob-kn-tag[data-cat="approved_change"] { background: var(--ob-decision-soft); color: var(--ob-decision); border-color: rgba(125, 211, 111, 0.4); }
+.ob-kn-tag[data-cat="rejected_proposal"] { background: var(--ob-warn-soft); color: var(--ob-warn); border-color: rgba(255, 155, 138, 0.4); }
+.ob-kn-tag[data-cat="historical"] { background: var(--ob-neutral-soft); color: var(--ob-neutral); border-color: rgba(154, 168, 154, 0.35); }
+.ob-kn-tag[data-cat="ai_recall"] { background: var(--ob-people-soft); color: var(--ob-people); border-color: rgba(217, 164, 104, 0.4); }
+.ob-kn-tag[data-cat="manager_review"] { background: var(--ob-pending-soft); color: var(--ob-pending); border-color: rgba(245, 215, 110, 0.4); }
+.ob-kn-tag[data-cat="correction"] { background: var(--ob-people-soft); color: var(--ob-people); border-color: rgba(217, 164, 104, 0.4); }
+.ob-kn-tag[data-cat="conflict"] { background: var(--ob-warn-soft); color: var(--ob-warn); border-color: rgba(255, 155, 138, 0.4); }
+.ob-kn-tag[data-cat="merge_history"] { background: var(--ob-trust-soft); color: var(--ob-trust); border-color: rgba(134, 184, 201, 0.4); }
+.ob-kn-tag[data-cat="audit"] { background: var(--ob-neutral-soft); color: var(--ob-neutral); border-color: rgba(154, 168, 154, 0.35); }
 
 .ob-kn h3 {
   font-family: var(--nf-display, inherit), ui-sans-serif, sans-serif;
@@ -639,10 +662,10 @@
 }
 
 .ob-activity-type[data-type="approved"] { background: var(--ob-decision-soft); color: var(--ob-decision); }
-.ob-activity-type[data-type="proposed"] { background: var(--ob-people-soft); color: var(--ob-people); }
+.ob-activity-type[data-type="proposed"] { background: var(--ob-pending-soft); color: var(--ob-pending); }
 .ob-activity-type[data-type="recalled"] { background: var(--ob-trust-soft); color: var(--ob-trust); }
-.ob-activity-type[data-type="corrected"] { background: #f0e8e0; color: #6a5a3a; }
-.ob-activity-type[data-type="merged"] { background: #e4e8ec; color: #4a5a6a; }
+.ob-activity-type[data-type="corrected"] { background: var(--ob-people-soft); color: var(--ob-people); }
+.ob-activity-type[data-type="merged"] { background: var(--ob-trust-soft); color: var(--ob-trust); }
 
 /* The reset confirmation modal. */
 
@@ -700,21 +723,100 @@
   margin: 0;
 }
 
+/* Card polish: real surfaces, quiet elevation, hover that answers the
+   cursor. (Every card assumed --ob-surface — see the token block.) */
+
+.ob-kn,
+.ob-scenario-card,
+.ob-connection,
+.ob-person,
+.ob-activity-row,
+.ob-ask,
+.ob-demo-hero-card {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+  transition: border-color 160ms ease;
+}
+
+.ob-kn:hover,
+.ob-scenario-card:hover,
+.ob-connection:hover,
+.ob-person:hover,
+.ob-activity-row:hover {
+  border-color: var(--ob-line-strong);
+}
+
+.ob-brain-card:hover {
+  border-color: rgba(125, 211, 111, 0.45);
+  transform: translateY(-2px);
+}
+
+/* Four-column grids that must actually collapse on small screens —
+   replaces inline gridTemplateColumns overrides that beat the media
+   queries and caused horizontal scrolling at 390px. */
+
+.ob-demo-quick.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.ob-brain-grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+/* Tour dialog entrance. */
+
+@keyframes ob-tour-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ob-tour { animation: ob-tour-in 180ms ease-out; }
+.ob-tour-card { animation: ob-tour-in 240ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+.ob-tour-progress-step {
+  transition: background-color 240ms ease;
+}
+
+/* Section rhythm: give scan-stops more air. */
+
+.ob-demo-section {
+  padding: 40px 0;
+}
+
+.ob-demo-section + .ob-demo-section {
+  border-top: 1px solid var(--ob-line);
+}
+
 /* Responsive. */
 
 @media (max-width: 960px) {
   .ob-demo-hero-grid { grid-template-columns: 1fr; }
-  .ob-brain-grid { grid-template-columns: 1fr; }
+  .ob-brain-grid,
+  .ob-brain-grid.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ob-scenarios { grid-template-columns: 1fr; }
   .ob-people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ob-connections { grid-template-columns: 1fr; }
-  .ob-demo-bar-nav { gap: 12px; }
+  .ob-demo-quick.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ob-demo-bar-nav { gap: 4px; }
 }
 
 @media (max-width: 640px) {
   .ob-people-grid { grid-template-columns: 1fr; }
   .ob-activity-row { grid-template-columns: 1fr; gap: 6px; }
-  .ob-demo-quick { grid-template-columns: 1fr; }
+  .ob-demo-quick,
+  .ob-demo-quick.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ob-brain-grid,
+  .ob-brain-grid.cols-4 { grid-template-columns: 1fr; }
+  /* The bar: label + brand on row one; the section nav becomes a
+     swipeable row rather than a 3-deep wrap. */
+  .ob-demo-bar { padding: 10px 0; }
+  .ob-demo-bar-inner { padding: 0 16px; }
+  .ob-demo-bar-nav {
+    order: 10;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: 0;
+    padding-bottom: 2px;
+  }
+  .ob-demo-bar-nav::-webkit-scrollbar { display: none; }
+  .ob-demo-bar-cta { margin-left: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -725,7 +827,16 @@
   .ob-scenario-card,
   .ob-activity-row,
   .ob-ask,
-  .ob-ask-answer {
+  .ob-ask-answer,
+  .ob-demo-bar-nav a,
+  .ob-tour-progress-step {
     transition: none;
+  }
+  .ob-tour,
+  .ob-tour-card {
+    animation: none;
+  }
+  .ob-brain-card:hover {
+    transform: none;
   }
 }

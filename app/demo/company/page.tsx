@@ -17,10 +17,10 @@ const DEPT_LIST = [
   { name: "Executive", color: "var(--ob-decision)" },
   { name: "HR", color: "var(--ob-people)" },
   { name: "Sales", color: "var(--ob-trust)" },
-  { name: "Operations", color: "#8a6a3a" },
-  { name: "Finance", color: "#4a5a6a" },
-  { name: "IT", color: "#2b5a6e" },
-  { name: "Engineering", color: "#3a6b3a" },
+  { name: "Operations", color: "var(--ob-pending)" },
+  { name: "Finance", color: "var(--ob-neutral)" },
+  { name: "IT", color: "var(--ob-trust)" },
+  { name: "Engineering", color: "var(--ob-decision)" },
 ] as const;
 
 export default function DemoCompanyPage() {
@@ -34,7 +34,7 @@ export default function DemoCompanyPage() {
               <p className="ent-eyebrow">The company</p>
               <h1>{COMPANY.name}</h1>
               <p className="lede">{COMPANY.description}</p>
-              <div className="ob-demo-quick" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+              <div className="ob-demo-quick cols-4">
                 <div className="ob-demo-quick-stat">
                   <p className="label">Founded</p>
                   <p className="value" style={{ fontSize: "1.2rem" }}>{COMPANY.founded}</p>
@@ -63,7 +63,7 @@ export default function DemoCompanyPage() {
               Company Brain is the cross-department view of the company&apos;s
               shared knowledge.
             </p>
-            <div className="ob-brain-grid" style={{ gridTemplateColumns: "repeat(4, 1fr)" }}>
+            <div className="ob-brain-grid cols-4">
               {DEPT_LIST.map((d) => {
                 const count = PEOPLE.filter((p) => p.department === d.name).length;
                 return (
