@@ -100,7 +100,13 @@ step 3 8 "Installing Node.js 22+"
 if ! command -v node >/dev/null 2>&1 || [ "$(node -p 'process.versions.node.split(".")[0]')" -lt 22 ]; then
   info "Adding NodeSource repo and installing Node.js 22"
   $SUDO mkdir -p /etc/apt/keyrings
-  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | $SUDO tee /etc/apt/keyrings/nodesource.gpg >/dev/null
+  # NodeSource serves this key ASCII-armored (plain text); apt's
+  # signed-by= needs a binary keyring. Piping straight to tee (as an
+  # earlier version of this script did) writes an armored text file
+  # that apt can't verify against — every install hit
+  # "NO_PUBKEY ... not signed" here. gpg --dearmor converts it.
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | $SUDO gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+  $SUDO chmod a+r /etc/apt/keyrings/nodesource.gpg
   echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" | $SUDO tee /etc/apt/sources.list.d/nodesource.list >/dev/null
   $SUDO apt-get update -qq
   $SUDO apt-get install -y -qq nodejs
