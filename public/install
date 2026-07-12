@@ -53,8 +53,8 @@
 
 set -euo pipefail
 
-OPENBEAN_VERSION="${OPENBEAN_VERSION:-0.1.0}"
-BUNDLE_URL="${OPENBEAN_BUNDLE_URL:-https://github.com/openbean/openbean/releases/download/v${OPENBEAN_VERSION}/openbean-server-bundle-v${OPENBEAN_VERSION}.tar.gz}"
+OPENBEAN_VERSION="${OPENBEAN_VERSION:-1.0.0-alpha.2}"
+BUNDLE_URL="${OPENBEAN_BUNDLE_URL:-https://github.com/openbean/openbean-releases/releases/download/v${OPENBEAN_VERSION}/openbean-server-bundle-v${OPENBEAN_VERSION}.tar.gz}"
 INSTALL_DIR="${OPENBEAN_INSTALL_DIR:-/opt/openbean}"
 
 # M3.1 — user-mode install flag. Defaults to system

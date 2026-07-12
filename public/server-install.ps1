@@ -10,8 +10,8 @@
 
 $ErrorActionPreference = "Stop"
 
-$OPENBEAN_VERSION = if ($env:OPENBEAN_VERSION) { $env:OPENBEAN_VERSION } else { "0.1.0" }
-$BUNDLE_URL = if ($env:OPENBEAN_BUNDLE_URL) { $env:OPENBEAN_BUNDLE_URL } else { "https://github.com/openbean/openbean/releases/download/v$OPENBEAN_VERSION/openbean-server-bundle-v$OPENBEAN_VERSION.tar.gz" }
+$OPENBEAN_VERSION = if ($env:OPENBEAN_VERSION) { $env:OPENBEAN_VERSION } else { "1.0.0-alpha.2" }
+$BUNDLE_URL = if ($env:OPENBEAN_BUNDLE_URL) { $env:OPENBEAN_BUNDLE_URL } else { "https://github.com/openbean/openbean-releases/releases/download/v$OPENBEAN_VERSION/openbean-server-bundle-v$OPENBEAN_VERSION.tar.gz" }
 $INSTALL_DIR = if ($env:OPENBEAN_INSTALL_DIR) { $env:OPENBEAN_INSTALL_DIR } else { "$env:ProgramFiles\OpenBean" }
 
 function Write-Banner($msg) {

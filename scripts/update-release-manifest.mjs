@@ -3,19 +3,23 @@
 // The engine repo's release pipeline (openbean/openbean
 // .github/workflows/release.yml) builds native installers and attaches a
 // release-manifest.json (schema openbean.release-manifest.v1) to every
-// tagged release. This script pulls that manifest down so the website's
-// /download page — which reads public/downloads/latest.json at build
-// time — always describes the latest release.
+// tagged release, publishing it to openbean/openbean-releases — a
+// separate, source-free public repo (openbean/openbean itself is
+// private, and GitHub gates release assets behind a private repo's
+// visibility, so a public /download page has to read from elsewhere).
+// This script pulls that manifest down so the website's /download page
+// — which reads public/downloads/latest.json at build time — always
+// describes the latest release.
 //
 // Run manually after a release, or wire it into CI ahead of `next build`:
 //   node scripts/update-release-manifest.mjs
 //
-// Exits 0 without touching the file when no release is reachable (repo
-// private, no releases yet, network down) so builds never break on it.
+// Exits 0 without touching the file when no release is reachable (no
+// releases yet, network down) so builds never break on it.
 
 import { writeFileSync } from "node:fs";
 
-const REPO = process.env.OPENBEAN_RELEASE_REPO ?? "openbean/openbean";
+const REPO = process.env.OPENBEAN_RELEASE_REPO ?? "openbean/openbean-releases";
 const OUT = new URL("../public/downloads/latest.json", import.meta.url);
 
 const headers = { "User-Agent": "openbean-website-manifest-refresh" };

@@ -241,7 +241,7 @@ function ArtifactList({ artifacts }: { artifacts: ReleaseArtifact[] }) {
         return (
           <li key={a.name}>
             <a
-              href={`https://github.com/openbean/openbean/releases/latest/download/${a.name}`}
+              href={`https://github.com/openbean/openbean-releases/releases/latest/download/${a.name}`}
               rel="noopener"
             >
               {PLATFORM_LABELS[key] ?? a.name}
