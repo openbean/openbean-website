@@ -195,10 +195,10 @@ info "Running openbean-server install …"
 echo
 INSTALLER_ARGS=("$@")
 if [ "$USER_MODE" = "1" ]; then
-  INSTALLER_ARGS=("--user" "${INSTALLER_ARGS[@]}")
+  INSTALLER_ARGS=("--user" ${INSTALLER_ARGS[@]+"${INSTALLER_ARGS[@]}"})
 fi
 if command -v node >/dev/null 2>&1; then
-  exec node "$BUNDLE_ROOT/server-installer/bin/openbean-server.mjs" install "${INSTALLER_ARGS[@]}"
+  exec node "$BUNDLE_ROOT/server-installer/bin/openbean-server.mjs" install ${INSTALLER_ARGS[@]+"${INSTALLER_ARGS[@]}"}
 else
   # M3.1 — last-resort fallback when node is not on
   # PATH and the apt/brew install failed: tell the
@@ -209,6 +209,6 @@ else
   err "  Ubuntu:  curl -fsSL https://deb.nodesource.com/setup_22.x | sudo bash && sudo apt install -y nodejs"
   err "  macOS:   brew install node@22"
   err "Or run the installer's own runtime path manually:"
-  err "  bash $BUNDLE_ROOT/server-installer/bin/openbean-server.sh install ${INSTALLER_ARGS[*]}"
+  err "  bash $BUNDLE_ROOT/server-installer/bin/openbean-server.sh install ${INSTALLER_ARGS[*]+"${INSTALLER_ARGS[*]}"}"
   exit 1
 fi
