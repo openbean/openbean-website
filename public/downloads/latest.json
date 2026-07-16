@@ -1,42 +1,42 @@
 {
   "schema": "openbean.release-manifest.v1",
-  "version": "1.0.1-alpha",
+  "version": "1.0.2-alpha",
   "channel": "alpha",
-  "git_sha": "b518690aa44ccfe0be85138844633fa589543219",
-  "released_at": "2026-07-16T01:33:35.191Z",
+  "git_sha": "bf3992dc83dd496eb16dab389f4bb238a47db1f3",
+  "released_at": "2026-07-16T01:55:53.697Z",
   "artifacts": [
     {
-      "name": "openbean-server-1.0.1-alpha_amd64.deb",
-      "sha256": "ea41c282b01178f3a98a0363d1a6225cbec62a1bd999241730d2cfbc5023f09c",
-      "size": 53376630,
+      "name": "openbean-server-1.0.2-alpha_amd64.deb",
+      "sha256": "edcca5938888f5c4dfa3c27e5396b20267aec63a2055721cb26cb69bb652dee2",
+      "size": 53370770,
       "os": "unknown",
       "format": "deb"
     },
     {
       "name": "openbean-server-darwin-universal.dmg",
-      "sha256": "366241385d8f45eaae26f79caabe11f84591f7b8769f2653abe1a34517b58526",
-      "size": 49212118,
+      "sha256": "306aac6534e0b1b51de87cf9e09a28965a07b28d8a21f6ce10622fc5c70ead26",
+      "size": 49209602,
       "os": "darwin",
       "format": "dmg"
     },
     {
       "name": "openbean-server-darwin-universal.pkg",
-      "sha256": "14a5092afb4bcf6c61897faa75aaf20585c133cb211d8476b58fa33355eb4e8f",
-      "size": 48525475,
+      "sha256": "7c0b1c1b4056aa056e7fae017bebf87b5eee9443b383a931c1b12125b44ad448",
+      "size": 48525917,
       "os": "darwin",
       "format": "pkg"
     },
     {
       "name": "openbean-server-linux-x86_64.AppImage",
-      "sha256": "3365abd674ddc9d4737b0f5757a4f64dd1f2bc29697e092e478b4020d51bbdfb",
+      "sha256": "56fd5def5dbb5de9331d4a53473c0ce88af724361faa049dda74dc2532ae8410",
       "size": 42404344,
       "os": "linux",
       "format": "appimage"
     },
     {
       "name": "openbean-server-windows-amd64-installer.exe",
-      "sha256": "4f238fdf74d7f6a10bf67dbf4538257cc800a6ca28c88f9850d0ebd0cd59c22d",
-      "size": 23812294,
+      "sha256": "4977bb8c520fd5f4faa85fcd5d45f1f91b8b8f5b0b0410cd36b5804ddd2510c9",
+      "size": 23812297,
       "os": "windows",
       "format": "exe"
     }
