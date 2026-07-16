@@ -1,8 +1,46 @@
 {
   "schema": "openbean.release-manifest.v1",
-  "version": "0.1.0",
+  "version": "1.0.1-alpha",
   "channel": "alpha",
-  "released_at": null,
-  "artifacts": [],
-  "note": "Native installer artifacts are published with each tagged release. None are publicly available yet — OpenBean is in private alpha; installers are delivered through the evaluation program. Regenerate this file with scripts/update-release-manifest.mjs once public releases exist."
+  "git_sha": "b518690aa44ccfe0be85138844633fa589543219",
+  "released_at": "2026-07-16T01:33:35.191Z",
+  "artifacts": [
+    {
+      "name": "openbean-server-1.0.1-alpha_amd64.deb",
+      "sha256": "ea41c282b01178f3a98a0363d1a6225cbec62a1bd999241730d2cfbc5023f09c",
+      "size": 53376630,
+      "os": "unknown",
+      "format": "deb"
+    },
+    {
+      "name": "openbean-server-darwin-universal.dmg",
+      "sha256": "366241385d8f45eaae26f79caabe11f84591f7b8769f2653abe1a34517b58526",
+      "size": 49212118,
+      "os": "darwin",
+      "format": "dmg"
+    },
+    {
+      "name": "openbean-server-darwin-universal.pkg",
+      "sha256": "14a5092afb4bcf6c61897faa75aaf20585c133cb211d8476b58fa33355eb4e8f",
+      "size": 48525475,
+      "os": "darwin",
+      "format": "pkg"
+    },
+    {
+      "name": "openbean-server-linux-x86_64.AppImage",
+      "sha256": "3365abd674ddc9d4737b0f5757a4f64dd1f2bc29697e092e478b4020d51bbdfb",
+      "size": 42404344,
+      "os": "linux",
+      "format": "appimage"
+    },
+    {
+      "name": "openbean-server-windows-amd64-installer.exe",
+      "sha256": "4f238fdf74d7f6a10bf67dbf4538257cc800a6ca28c88f9850d0ebd0cd59c22d",
+      "size": 23812294,
+      "os": "windows",
+      "format": "exe"
+    }
+  ],
+  "sbom": "sbom.spdx.json",
+  "checksums": "checksums.txt"
 }

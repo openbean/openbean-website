@@ -1,16 +1,26 @@
-# OpenBean Server Installer — Windows launcher.
+# OpenBean Server Installer - Windows launcher.
 #
 # The Windows entry point. Mirrors server-install.sh
 # for POSIX. The user runs:
 #
 #   irm https://openbean.xyz/server-install.ps1 | iex
 #
-# (also served at https://openbean.xyz/install.ps1 —
+# (also served at https://openbean.xyz/install.ps1 -
 # the two URLs carry the same script).
 
 $ErrorActionPreference = "Stop"
 
-$OPENBEAN_VERSION = if ($env:OPENBEAN_VERSION) { $env:OPENBEAN_VERSION } else { "1.0.0-alpha.2" }
+# Resolve the version: explicit env wins; else ask the releases repo
+# for the latest published tag; else fall back to the last-known
+# release. A new release then ships by TAG ALONE - no launcher edit.
+$OPENBEAN_VERSION = $env:OPENBEAN_VERSION
+if (-not $OPENBEAN_VERSION) {
+  try {
+    $rel = Invoke-RestMethod -Uri "https://api.github.com/repos/openbean/openbean-releases/releases/latest" -Headers @{ "User-Agent" = "openbean-installer" } -ErrorAction Stop
+    $OPENBEAN_VERSION = ($rel.tag_name -replace '^v', '')
+  } catch { }
+}
+if (-not $OPENBEAN_VERSION) { $OPENBEAN_VERSION = "1.0.1-alpha" }
 $BUNDLE_URL = if ($env:OPENBEAN_BUNDLE_URL) { $env:OPENBEAN_BUNDLE_URL } else { "https://github.com/openbean/openbean-releases/releases/download/v$OPENBEAN_VERSION/openbean-server-bundle-v$OPENBEAN_VERSION.tar.gz" }
 $INSTALL_DIR = if ($env:OPENBEAN_INSTALL_DIR) { $env:OPENBEAN_INSTALL_DIR } else { "$env:ProgramFiles\OpenBean" }
 

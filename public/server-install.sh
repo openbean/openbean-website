@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# OpenBean Server Installer — the launcher shim.
+# OpenBean Server Installer - the launcher shim.
 #
 # This is the script the `curl | bash` flow
 # downloads. It is intentionally small. Its job
@@ -22,7 +22,7 @@
 # downloads the launcher at a specific version
 # the version is baked in.
 #
-# M3.1 — three reliability fixes:
+# M3.1 - three reliability fixes:
 #   1. The root check at line 47 was a hard
 #      `exit 1` for any non-root user. That
 #      gates out user-mode systemd, which is the
@@ -46,11 +46,18 @@
 
 set -euo pipefail
 
-OPENBEAN_VERSION="${OPENBEAN_VERSION:-1.0.0-alpha.2}"
+# Resolve the version: explicit OPENBEAN_VERSION wins; else ask the
+# releases repo for the latest published tag; else fall back to the
+# last-known release. New releases then ship by TAG ALONE.
+OPENBEAN_VERSION="${OPENBEAN_VERSION:-}"
+if [ -z "$OPENBEAN_VERSION" ]; then
+  OPENBEAN_VERSION="$(curl -fsSL "https://api.github.com/repos/openbean/openbean-releases/releases/latest" 2>/dev/null | grep '"tag_name"' | head -1 | cut -d'"' -f4 | sed 's/^v//' || true)"
+fi
+OPENBEAN_VERSION="${OPENBEAN_VERSION:-1.0.1-alpha}"
 BUNDLE_URL="${OPENBEAN_BUNDLE_URL:-https://github.com/openbean/openbean-releases/releases/download/v${OPENBEAN_VERSION}/openbean-server-bundle-v${OPENBEAN_VERSION}.tar.gz}"
 INSTALL_DIR="${OPENBEAN_INSTALL_DIR:-/opt/openbean}"
 
-# M3.1 — user-mode install flag. Defaults to system
+# M3.1 - user-mode install flag. Defaults to system
 # install (the historical behaviour). Set to 1 to
 # install in $HOME/.openbean and use systemd --user
 # (no root required; the right path for a developer
@@ -67,7 +74,7 @@ Usage: server-install.sh [openbean-server args]
 
 Environment:
   OPENBEAN_VERSION=0.1.0       The version to install.
-  BUNDLE_URL=…                Override the bundle URL.
+  BUNDLE_URL=...                Override the bundle URL.
   INSTALL_DIR=/opt/openbean    Override the install path.
   OPENBEAN_USER_MODE=1         Install in \$HOME/.openbean (no sudo).
 
@@ -98,21 +105,21 @@ case "$OS" in
   MINGW*|MSYS*|CYGWIN*) PLATFORM="windows-bash" ;;
   *)        err "Unrecognized platform '$OS'."; exit 1 ;;
 esac
-bold "OpenBean Server v${OPENBEAN_VERSION} — installer launcher"
+bold "OpenBean Server v${OPENBEAN_VERSION} - installer launcher"
 info "Platform:   $PLATFORM"
 info "Bundle:     $BUNDLE_URL"
 info "Target:     $INSTALL_DIR"
 info "User mode:  $USER_MODE"
 echo
 
-# M3.1 — root check now respects user-mode install.
+# M3.1 - root check now respects user-mode install.
 # A non-root user with OPENBEAN_USER_MODE=1 is the
 # correct, supported flow on a developer machine.
-# A non-root user without it is still rejected —
+# A non-root user without it is still rejected -
 # they need either sudo or --user.
 if [ "$PLATFORM" != "windows-bash" ] && [ "$(id -u)" -ne 0 ]; then
   if [ "$USER_MODE" = "1" ]; then
-    info "Running as non-root in user mode — installing to $INSTALL_DIR (no sudo needed)."
+    info "Running as non-root in user mode - installing to $INSTALL_DIR (no sudo needed)."
   else
     err "This installer needs root, or pass --user for a non-sudo install."
     err "  curl -fsSL https://openbean.xyz/server | sudo bash"
@@ -121,7 +128,7 @@ if [ "$PLATFORM" != "windows-bash" ] && [ "$(id -u)" -ne 0 ]; then
   fi
 fi
 
-# M3.1 — install Node 22 if missing. The launcher's
+# M3.1 - install Node 22 if missing. The launcher's
 # own `exec node` step needs node on PATH; the
 # installer's production runtime downloads a static
 # Node 22 binary into the install path, but the
@@ -132,7 +139,7 @@ fi
 if ! command -v node >/dev/null 2>&1; then
   case "$PLATFORM" in
     linux)
-      info "Node is not installed. Attempting to install Node 22 via the system package manager…"
+      info "Node is not installed. Attempting to install Node 22 via the system package manager..."
       if command -v apt-get >/dev/null 2>&1; then
         if [ "$(id -u)" -ne 0 ]; then
           info "No sudo; skipping Node install. The installer's own runtime will download Node."
@@ -146,7 +153,7 @@ if ! command -v node >/dev/null 2>&1; then
       ;;
     macos)
       if command -v brew >/dev/null 2>&1; then
-        info "Node is not installed. Attempting to install via Homebrew…"
+        info "Node is not installed. Attempting to install via Homebrew..."
         brew install node@22 >/dev/null 2>&1 || true
       fi
       ;;
@@ -162,7 +169,7 @@ fi
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 
-info "Downloading bundle …"
+info "Downloading bundle ..."
 if command -v curl >/dev/null 2>&1; then
   curl -fsSL "$BUNDLE_URL" -o "$WORK/bundle.tar.gz"
 elif command -v wget >/dev/null 2>&1; then
@@ -173,7 +180,7 @@ else
 fi
 ok "Downloaded $(du -h "$WORK/bundle.tar.gz" | cut -f1)."
 
-info "Extracting bundle …"
+info "Extracting bundle ..."
 tar -xzf "$WORK/bundle.tar.gz" -C "$WORK"
 BUNDLE_ROOT="$(find "$WORK" -maxdepth 1 -type d ! -path "$WORK" | head -n 1)"
 if [ -z "$BUNDLE_ROOT" ] || [ ! -d "$BUNDLE_ROOT/server-installer" ]; then
@@ -185,13 +192,13 @@ ok "Bundle extracted."
 # Invoke the installer. The installer's
 # `install` subcommand is its own Node.js
 # process; this launcher just calls it.
-# M3.1 — if user-mode was requested via
+# M3.1 - if user-mode was requested via
 # OPENBEAN_USER_MODE=1 or --user, pass
 # --user through to the installer so its
 # preflight agrees with the launcher's
 # check. The installer's own preflight
 # is the source of truth on this flag.
-info "Running openbean-server install …"
+info "Running openbean-server install ..."
 echo
 INSTALLER_ARGS=("$@")
 if [ "$USER_MODE" = "1" ]; then
@@ -200,7 +207,7 @@ fi
 if command -v node >/dev/null 2>&1; then
   exec node "$BUNDLE_ROOT/server-installer/bin/openbean-server.mjs" install ${INSTALLER_ARGS[@]+"${INSTALLER_ARGS[@]}"}
 else
-  # M3.1 — last-resort fallback when node is not on
+  # M3.1 - last-resort fallback when node is not on
   # PATH and the apt/brew install failed: tell the
   # operator what to do instead of leaving them
   # with a `node: command not found` error.
