@@ -1,42 +1,42 @@
 {
   "schema": "openbean.release-manifest.v1",
-  "version": "1.0.2-alpha",
+  "version": "1.0.4-alpha",
   "channel": "alpha",
-  "git_sha": "bf3992dc83dd496eb16dab389f4bb238a47db1f3",
-  "released_at": "2026-07-16T01:55:53.697Z",
+  "git_sha": "2d290a817e0d5bc7fbb6f6a8efa7a9634bebabea",
+  "released_at": "2026-07-16T03:43:29.274Z",
   "artifacts": [
     {
-      "name": "openbean-server-1.0.2-alpha_amd64.deb",
-      "sha256": "edcca5938888f5c4dfa3c27e5396b20267aec63a2055721cb26cb69bb652dee2",
-      "size": 53370770,
+      "name": "openbean-server-1.0.4-alpha_amd64.deb",
+      "sha256": "78099bc9fbdf134a9bc68321fe5b577d5b9c61cfd10c842cb23a880c81d02074",
+      "size": 53374746,
       "os": "unknown",
       "format": "deb"
     },
     {
       "name": "openbean-server-darwin-universal.dmg",
-      "sha256": "306aac6534e0b1b51de87cf9e09a28965a07b28d8a21f6ce10622fc5c70ead26",
-      "size": 49209602,
+      "sha256": "797cd25b6431767a2a7fafc8744b703650aa93fbb9040c4260e16fe879abbab6",
+      "size": 49211578,
       "os": "darwin",
       "format": "dmg"
     },
     {
       "name": "openbean-server-darwin-universal.pkg",
-      "sha256": "7c0b1c1b4056aa056e7fae017bebf87b5eee9443b383a931c1b12125b44ad448",
-      "size": 48525917,
+      "sha256": "9167cbc538e52096dde8e9817c0c57e15eee022c7083d9ceee0f22eafb95a9e2",
+      "size": 48530991,
       "os": "darwin",
       "format": "pkg"
     },
     {
       "name": "openbean-server-linux-x86_64.AppImage",
-      "sha256": "56fd5def5dbb5de9331d4a53473c0ce88af724361faa049dda74dc2532ae8410",
-      "size": 42404344,
+      "sha256": "03176c97ff001065ae9bae15fc6e8616ea90ab560933c96fa05f727c3e286cc0",
+      "size": 42408440,
       "os": "linux",
       "format": "appimage"
     },
     {
       "name": "openbean-server-windows-amd64-installer.exe",
-      "sha256": "4977bb8c520fd5f4faa85fcd5d45f1f91b8b8f5b0b0410cd36b5804ddd2510c9",
-      "size": 23812297,
+      "sha256": "268210d2f451869a960cf42afb48624288f85918d5080108c396b87015845c53",
+      "size": 23816303,
       "os": "windows",
       "format": "exe"
     }
