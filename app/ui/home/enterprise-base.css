@@ -121,14 +121,22 @@
 
 /* ── buttons ──────────────────────────────────────────────────────────── */
 
-.ob-btn {
+/* NOTE: these color rules are prefixed with `.ob ` on purpose. The global
+   `.ob a { color: inherit }` rule has specificity (0,1,1), which outranks a
+   bare `.ob-btn-primary` (0,1,0) — so every button that is an <a> (all the
+   primary CTAs) was ignoring its own text color and INHERITING the
+   surrounding light body text, rendering as pale text on the light-green
+   fill (~1.75:1 contrast, effectively unreadable). Prefixing with `.ob `
+   makes each rule (0,2,0), which wins, so the intended colors apply. */
+
+.ob .ob-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   min-height: 44px;
   padding: 0 20px;
-  border: 1.5px solid rgba(235, 245, 238, 0.45);
+  border: 1.5px solid rgba(235, 245, 238, 0.55);
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.06);
   color: #ffffff;
@@ -138,23 +146,26 @@
   transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
 }
 
-.ob-btn:hover {
+/* Secondary / ghost button hover: brighten the border and lift the fill so
+   the state change is unmistakable, keeping crisp white text. */
+.ob .ob-btn:hover {
   border-color: var(--ob-green-bright);
-  background: rgba(125, 211, 111, 0.12);
+  background: rgba(125, 211, 111, 0.18);
   color: #ffffff;
 }
 
-.ob-btn-primary {
+/* Primary button: green fill with near-black text (~10.7:1 contrast). */
+.ob .ob-btn-primary {
   border-color: var(--ob-green);
   background: var(--ob-green);
-  color: #08170c;
+  color: #06130a;
   box-shadow: 0 14px 34px -12px var(--ob-glow);
 }
 
-.ob-btn-primary:hover {
+.ob .ob-btn-primary:hover {
   background: var(--ob-green-bright);
   border-color: var(--ob-green-bright);
-  color: #08170c;
+  color: #06130a;
 }
 
 .ob-btn-lg {
