@@ -208,6 +208,36 @@
   font-size: 1rem;
 }
 
+/* ── Copy-to-clipboard button on code blocks ── */
+
+.ob-copy-wrap {
+  position: relative;
+}
+
+.ob-copy-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 12px;
+  font: 600 0.74rem var(--font-mono), monospace;
+  color: var(--ob-muted-2);
+  background: var(--ob-panel);
+  border: 1px solid var(--ob-line-strong);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.ob-copy-btn:hover {
+  color: var(--ob-ink);
+  border-color: var(--ob-green);
+}
+
+.ob-copy-btn[data-copied="true"] {
+  color: var(--ob-green);
+  border-color: var(--ob-green);
+}
+
 @media (max-width: 700px) {
   .ob-doc-grid {
     grid-template-columns: 1fr;
